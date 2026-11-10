@@ -140,7 +140,7 @@ textarea,input[type=text]{width:100%;border:1px solid #cbd6e5;border-radius:9px;
    <div class="task"><input type="checkbox" data-id="ov2"><label><b>2. SOPs, CV and LORs</b><small>Build two strong core narratives and tailor them to each programme; professors are currently on leave.</small></label></div>
    <div class="task"><input type="checkbox" data-id="ov3" checked><label><b>3. English/MOI decisions</b><small>Three programme-specific exemptions confirmed; Purdue and Manchester require a test; Georgia Tech, UCD and UT MSBTAI are pending.</small></label></div>
    <div class="task"><input type="checkbox" data-id="ov4"><label><b>4. Graded probability/statistics course</b><small>Get programme acceptance in writing before paying for a course.</small></label></div>
-   <div class="task"><input type="checkbox" data-id="ov5"><label><b>5. Project A scope and GitHub setup</b><small>Build the credit-risk validation project in December, after application deadlines are protected.</small></label></div>
+   <div class="task"><input type="checkbox" data-id="ov5"><label><b>5. Project A — SBA 7(a) analysis and validation</b><small>Analysis is ahead of plan: cohort, baseline, Tasks 3–5B and initial 5C done; corrected 5C, Task 5D and portfolio packaging remain.</small></label></div>
    <div class="task"><input type="checkbox" data-id="ov6"><label><b>6. Project B and one specialist credential</b><small>Project B starts in January; do not stack multiple certificates during the application sprint.</small></label></div>
   </div>
   <aside class="panel">
@@ -232,181 +232,111 @@ textarea,input[type=text]{width:100%;border:1px solid #cbd6e5;border-radius:9px;
 </section>
 
 <section class="view" id="projects">
- <div class="callout good"><b>November focus:</b> use the dedicated 22-day technical sprint tab to complete Project A for one hour daily. Project B (C++/Python pricing toolkit) is deliberately deferred until after early December deadlines.</div>
- <div class="panel"><h2>Project A · Credit-Risk Model Validation Platform</h2><div class="cardhead"><span class="pill green">Main portfolio project · December</span><span class="pill blue">FDS / analytics / risk</span></div>
- <p><b>Purpose:</b> show that you can build, validate, explain and monitor a credit-risk model—not just run a notebook or call a library.</p>
- <h3>Build this sequence</h3>
- <div class="tablewrap"><table><thead><tr><th>Layer</th><th>Required implementation</th><th>Why it stands out</th></tr></thead><tbody>
- <tr><td>Data governance</td><td>Public/synthetic dataset, source/license, data dictionary, data lineage, missingness and leakage tests.</td><td>Reproducibility and responsible handling.</td></tr>
- <tr><td>Baseline model</td><td>Logistic regression / scorecard; compare one gradient-boosting challenger only after baseline works.</td><td>Interpretable baseline and challenger model discipline.</td></tr>
- <tr><td>Validation</td><td>Time-based/out-of-time split where possible; ROC-AUC, PR-AUC, KS, Brier score and calibration curve.</td><td>More than headline accuracy; credit-risk model performance and calibration.</td></tr>
- <tr><td>Stability</td><td>Population Stability Index (PSI), feature drift, vintage/cohort analysis and monitoring thresholds.</td><td>Model monitoring and validation practice.</td></tr>
- <tr><td>Explainability</td><td>SHAP/global-local explanations; reason codes; limitations and model card.</td><td>Transparent decision support.</td></tr>
- <tr><td>Risk stress</td><td>Scenario sensitivity, threshold economics and simulated macro stress; clearly label as illustrative, not a bank regulatory model.</td><td>Connects model output to risk decisions.</td></tr>
- <tr><td>Engineering</td><td>Python package, SQL storage, unit tests, GitHub Actions CI, Docker, Streamlit or FastAPI demo.</td><td>Production-minded, testable code.</td></tr>
- </tbody></table></div>
- <h3>GitHub repo structure</h3>
- <pre class="codeprompt">credit-risk-validation-platform/
-  README.md
-  LICENSE
-  pyproject.toml
-  .gitignore
-  data/              # no sensitive data; scripts or synthetic generator
-  notebooks/         # exploration only
-  src/
-    data_validation/
-    features/
-    models/
-    validation/
-    monitoring/
-    explainability/
-  tests/
-  app/               # Streamlit or FastAPI
-  reports/
-    model_card.md
-    validation_report.md
-  .github/workflows/ci.yml</pre>
- <div class="task"><input type="checkbox" data-id="pa1"><label>Write a one-page project charter and define a narrow use case</label></div>
- <div class="task"><input type="checkbox" data-id="pa2"><label>Select an openly licensed or synthetic dataset and record its provenance</label></div>
- <div class="task"><input type="checkbox" data-id="pa3"><label>Create repo, README, .gitignore, environment and first clean commit</label></div>
- <div class="task"><input type="checkbox" data-id="pa4"><label>Build data checks and leakage-safe train/test split</label></div>
- <div class="task"><input type="checkbox" data-id="pa5"><label>Build logistic regression baseline and evaluation notebook</label></div>
- <div class="task"><input type="checkbox" data-id="pa6"><label>Add calibration, Brier, KS, PR-AUC and error analysis</label></div>
- <div class="task"><input type="checkbox" data-id="pa7"><label>Add PSI/drift, SHAP and model card</label></div>
- <div class="task"><input type="checkbox" data-id="pa8"><label>Add tests, CI, SQL persistence and dashboard/API</label></div>
- <div class="task"><input type="checkbox" data-id="pa9"><label>Publish 2-page validation report, screenshots and 3-minute demo</label></div>
+ <div class="callout good"><b>Project A decision · 10 Nov 2026:</b> The public SBA 7(a) credit-risk analysis is now the flagship project. It is more distinctive than starting a second generic UCI credit-card project. Your analytical work is ahead of the original December plan; corrected validation, reproducibility and portfolio packaging remain.</div>
+ <div class="panel">
+  <h2>Project A · SBA 7(a) Credit-Risk Analytics &amp; Model Validation</h2>
+  <div class="cardhead"><span class="pill green">Flagship · analysis substantially advanced</span><span class="pill blue">Financial data science / credit risk / model risk</span></div>
+  <p><b>Dataset:</b> Public SBA 7(a) FOIA loan data, September 30, 2026 snapshot. Current development uses FY2010–FY2013 for fitting and FY2014 for forward validation. FY2015–FY2016 remains a locked test and has not been opened.</p>
+  <p><b>Why this is the right flagship:</b> it connects your ANZ credit-risk/model-validation experience to independent work on public portfolio data, temporal cohort construction, feature provenance, model comparison and a substantive product-data anomaly. Do not build a duplicate UCI benchmark in parallel.</p>
+  <h3>Verified progress · 10 November</h3>
+  <div class="tablewrap"><table><thead><tr><th>Workstream</th><th>Status</th><th>Evidence / outcome</th></tr></thead><tbody>
+   <tr><td>Data quality and cohort construction</td><td><span class="pill green">Completed</span></td><td>Public-data profiling, quality audits, fixed-horizon outcome and temporal cohort construction.</td></tr>
+   <tr><td>Task 3 — interpretability</td><td><span class="pill green">Completed</span></td><td>Feature-group permutation analysis and model interpretation; loan-term signal flagged for investigation.</td></tr>
+   <tr><td>Task 4 — feature enrichment</td><td><span class="pill green">Completed</span></td><td>Additional underwriting fields, missingness diagnostics and feature-provenance review.</td></tr>
+   <tr><td>Task 5A — model experiments A–F</td><td><span class="pill green">Completed</span></td><td>Compared feature sets, term/revolver interaction and term ablation on FY2014 validation. Experiment D was strongest in this run, but the term signal is not yet fully explained.</td></tr>
+   <tr><td>Task 5B — exact-term anomaly audit</td><td><span class="pill green">Completed</span></td><td>Investigated term patterns by year, revolving status and product groups.</td></tr>
+   <tr><td>Task 5C — initial adjusted analysis</td><td><span class="pill">Initial run complete</span></td><td>Adjusted associations and model comparison produced. Results remain provisional because the first risk curve included unsupported term/revolver combinations and did not fully report the Unanswered category.</td></tr>
+   <tr><td>Task 5C.1 — corrected analysis</td><td><span class="pill">Pending rerun</span></td><td>Correction script/package prepared; corrected output ZIP is not yet available.</td></tr>
+   <tr><td>Task 5D — product and model investigation</td><td><span class="pill">Not started</span></td><td>Begins only after corrected Task 5C passes its quality gate.</td></tr>
+  </tbody></table></div>
+  <h3>Critical Task 5C correction gate</h3>
+  <div class="callout warn"><b>Do not use the wrong input.</b> The saved sba_task5c_output.zip is the first-run output. The newer corrected package contains code and correction notes, not corrected results. The corrected script requires the Task 4 enriched cohort at sba_cohort_output_v2/strict_train_fy2010_2014.csv.gz, including revolver_status, fixed_or_variable_interest_ind and collateral_ind. The separately saved 15-column base cohort is not a valid substitute.</div>
+  <p>Accept Task 5C.1 only after checking: (1) all exact-term groups are retained and small groups flagged rather than pooled away; (2) the FY2014 term/revolver curve uses observed-support groups only; (3) the <i>Unanswered</i> business-age category has outcome rates and a full coefficient where estimable; (4) imputation medians are fitted on FY2010–FY2013 only; and (5) the manifest confirms FY2015–FY2016 was not opened.</p>
+  <h3>Next technical sequence</h3>
+  <ol>
+   <li><b>Corrected Task 5C.1:</b> run and verify the corrected outputs before treating any adjusted term result as final.</li>
+   <li><b>Task 5D:</b> product-driver investigation; <i>Unanswered</i> category sensitivity; term-pattern ablation; Logistic Regression versus HistGradientBoosting; calibration by group; final feature decisions.</li>
+   <li><b>Freeze the feature set:</b> confirm point-in-time availability and source definitions. Keep the FY2015–FY2016 locked test closed until the model and analysis decisions are frozen.</li>
+   <li><b>Portfolio packaging:</b> reproducible scripts, tests, README, model card, validation report, clear limitations and a small dashboard/demo.</li>
+  </ol>
+  <h3>Integrity and interpretation guardrails</h3>
+  <ul>
+   <li>Adjusted odds ratios are not risk ratios; associations are not causal effects.</li>
+   <li>Do not use first-run Task 5C metrics or off-support predictions as final CV/SOP evidence.</li>
+   <li>The external reference repository uses a June 30, 2026 snapshot; this project uses September 30, 2026. It has not been independently reproduced. Do not claim an exact reproduction.</li>
+   <li>Only describe results you can reproduce and defend in an interview.</li>
+  </ul>
+  <h3>Project checklist</h3>
+  <div class="task"><input type="checkbox" data-id="pa1"><label><b>Public SBA data source, snapshot and provenance documented</b><small>Completed · public FOIA data; September 30, 2026 snapshot.</small></label></div>
+  <div class="task"><input type="checkbox" data-id="pa2"><label><b>Data-quality audit, fixed-horizon cohort and temporal split</b><small>Completed · FY2010–FY2013 fit / FY2014 validation; locked test preserved.</small></label></div>
+  <div class="task"><input type="checkbox" data-id="pa3"><label><b>Baseline model and Task 5A feature experiments</b><small>Completed · experiments A–F and validation comparison.</small></label></div>
+  <div class="task"><input type="checkbox" data-id="pa4"><label><b>Task 3 interpretability and Task 4 feature enrichment</b><small>Completed · feature diagnostics, missingness and provenance work.</small></label></div>
+  <div class="task"><input type="checkbox" data-id="pa5"><label><b>Task 5B audit and initial Task 5C analysis</b><small>Initial work completed; Task 5C corrected rerun still required.</small></label></div>
+  <div class="task"><input type="checkbox" data-id="pa6"><label><b>Run corrected Task 5C.1 and pass all quality checks</b><small>Next action · use the enriched Task 4 cohort, not the 15-column base file.</small></label></div>
+  <div class="task"><input type="checkbox" data-id="pa7"><label><b>Complete Task 5D product-driver and model-comparison work</b><small>Pending · logistic versus HistGradientBoosting, term ablation and group calibration.</small></label></div>
+  <div class="task"><input type="checkbox" data-id="pa8"><label><b>Freeze features, verify timing and complete final validation</b><small>Pending · keep FY2015–FY2016 locked until the freeze decision.</small></label></div>
+  <div class="task"><input type="checkbox" data-id="pa9"><label><b>Publish reproducible code, report, tests and demo</b><small>Pending · only after results and implementation are independently checked.</small></label></div>
  </div>
- <div class="panel"><h2>Project B · C++ / Python Quant Pricing Toolkit</h2><div class="cardhead"><span class="pill amber">Start after December applications · January</span><span class="pill blue">QCF / quant finance</span></div>
- <p><b>Purpose:</b> demonstrate numerical finance, C++ implementation, computational methods and independent validation.</p>
- <div class="tablewrap"><table><thead><tr><th>Module</th><th>Implementation</th><th>Quality gate</th></tr></thead><tbody>
- <tr><td>Analytical pricing</td><td>Black–Scholes European calls/puts; dividends and rate assumptions documented.</td><td>Compare to known values and put-call parity.</td></tr>
- <tr><td>Tree model</td><td>Cox–Ross–Rubinstein binomial tree; American exercise extension.</td><td>Convergence toward Black–Scholes as steps increase.</td></tr>
- <tr><td>Monte Carlo</td><td>Path simulation, antithetic variates and confidence intervals.</td><td>Convergence/error decreases as paths increase.</td></tr>
- <tr><td>Greeks</td><td>Analytical and finite-difference delta, gamma, vega, theta, rho.</td><td>Cross-check both methods within tolerances.</td></tr>
- <tr><td>Implied volatility</td><td>Robust root solver (bisection/Brent or safeguarded Newton).</td><td>Recover known volatility from synthetic prices.</td></tr>
- <tr><td>Software engineering</td><td>C++20 library, Python bindings, tests, CI, docs and benchmark.</td><td>Reproducible build and clean API.</td></tr>
- </tbody></table></div>
- <div class="task"><input type="checkbox" data-id="pb1"><label>Set project scope and create C++ repository skeleton</label></div>
- <div class="task"><input type="checkbox" data-id="pb2"><label>Implement Black–Scholes and analytic Greeks</label></div>
- <div class="task"><input type="checkbox" data-id="pb3"><label>Implement CRR binomial model and convergence tests</label></div>
- <div class="task"><input type="checkbox" data-id="pb4"><label>Implement Monte Carlo with variance reduction</label></div>
- <div class="task"><input type="checkbox" data-id="pb5"><label>Add implied-vol solver, finite-difference Greeks and benchmarks</label></div>
- <div class="task"><input type="checkbox" data-id="pb6"><label>Add Python wrapper, tests, docs and demo</label></div>
- <div class="callout warn">Do not start both projects at full speed in November. Project A is the first build. Project B is deliberately sequenced after the early application deadlines.</div>
- </div>
- <div class="panel"><h2>One Claude session — 12 November (45 minutes)</h2><p class="hint">Use Claude once as an architecture reviewer and adversarial code reviewer. Do not blindly publish generated code; understand, test and own each component.</p>
- <div class="codeprompt" id="claudePrompt">I am building an original Credit-Risk Model Validation Platform using only public or synthetic data. Review this project brief and propose a minimal, reproducible Python repository architecture. Prioritise data lineage, leakage checks, an interpretable logistic-regression baseline, calibration (Brier score and reliability curves), out-of-time validation, PSI/drift monitoring, SHAP explanations, unit tests, CI and a small Streamlit/FastAPI demo. Suggest a staged plan and numerical sanity checks. Do not invent results or use proprietary banking code/data. Ask me to make design decisions, critique my implementation and identify risks rather than generating an entire finished project.</div>
- <button class="btn" id="copyClaude">Copy Claude prompt</button>
+ <div class="panel"><h2>Project B · C++ / Python Quant Pricing Toolkit</h2><div class="cardhead"><span class="pill amber">Defer until January 2027</span><span class="pill blue">QCF / quant finance</span></div>
+  <p>Keep Project B small and separate: Black–Scholes, binomial tree, Monte Carlo, Greeks, implied volatility and numerical tests. Do not start it while Project A, GRE, SOPs and December applications are still active.</p>
  </div>
 </section>
 
 <section class="view" id="techsprint">
  <div class="panel">
-  <h2>22-day technical standout sprint · 1 hour per day</h2>
-  <div class="callout good"><b>The goal:</b> one technically credible, public, reproducible project—not a stack of quick badges. Use ChatGPT as a pair-programmer and reviewer, but understand the design, run the code, verify the metrics and be able to defend every decision in an interview.</div>
+  <h2>Project A completion sprint · 11–30 November</h2>
+  <div class="callout good"><b>You are ahead on analysis, not yet on release.</b> The original plan expected project scoping in November and a baseline in December. By 10 November, you have already completed cohort construction, baseline experiments, interpretability, Task 4 enrichment, Task 5A, Task 5B and an initial Task 5C run. Use the remaining sprint for correction, model decisions and reproducibility—not another dataset or extra model variants.</div>
   <div class="grid">
-   <div class="kpi"><b>22 hours</b><span class="muted">9–30 November · 1 hour daily</span></div>
-   <div class="kpi"><b>1 repo</b><span class="muted">Credit-risk validation workbench</span></div>
-   <div class="kpi"><b>4 outputs</b><span class="muted">Code · dashboard · validation report · demo</span></div>
-   <div class="kpi"><b>₹0 tools</b><span class="muted">Open-source stack and public data</span></div>
+   <div class="kpi"><b>Completed</b><span class="muted">Data through initial Task 5C</span></div>
+   <div class="kpi"><b>11 Nov</b><span class="muted">Corrected Task 5C.1 → Task 5D gate</span></div>
+   <div class="kpi"><b>15 Nov</b><span class="muted">Target: Task 5D findings and feature-decision draft</span></div>
+   <div class="kpi"><b>15 Dec</b><span class="muted">Stretch target for portfolio v1; 31 Dec remains buffer</span></div>
   </div>
-  <div class="callout warn"><b>Scope discipline:</b> complete Project A to a polished MVP by 30 November. Do not try to finish Project B (C++ quant pricing) at the same time. Start Project B after the December application deadlines. One excellent repository is more persuasive than two shallow ones.</div>
+  <div class="callout warn"><b>Scope rule:</b> Task 5D must not run on top of unresolved Task 5C outputs. Do not open the FY2015–FY2016 locked test before the feature/model freeze. Application deadlines, LORs, GRE and SOPs outrank optional project features.</div>
  </div>
-
  <div class="panel">
-  <h2>The technical idea: Credit Risk Model Validation & Decisioning Workbench</h2>
-  <p><b>What makes it stand out:</b> most beginner portfolios stop at “train a classifier and report accuracy.” Your project will show the full model-risk lifecycle: scorecard baseline, challenger model, probability calibration, decision-threshold economics, subgroup diagnostics, explainability, drift tests, software tests and a documented validation opinion.</p>
-  <p><b>Dataset:</b> UCI Default of Credit Card Clients — 30,000 rows and 23 features, CC BY 4.0. It is a historical Taiwan consumer-credit dataset from 2005. Cite it correctly and explicitly state that it is an educational benchmark, not current bank data or a proxy for banking-sector portfolios.</p>
-  <a href="https://archive.ics.uci.edu/dataset/350/default%2Bof%2Bcredit%2Bcard%2Bclients%2Bdataset" target="_blank">Official UCI dataset, licence and citation</a>
-  <h3 style="margin-top:14px">Technical components</h3>
-  <div class="tablewrap"><table><thead><tr><th>Component</th><th>What you implement</th><th>What you can defend</th></tr></thead><tbody>
-   <tr><td>Credit scorecard baseline</td><td>Logistic regression; optionally WoE/Information Value binning as a stretch.</td><td>Interpretability, coefficient direction, scorecard trade-offs.</td></tr>
-   <tr><td>Challenger model</td><td>Gradient boosting (e.g. HistGradientBoosting or XGBoost if setup is smooth).</td><td>Why compare a flexible model with an interpretable baseline?</td></tr>
-   <tr><td>Discrimination & uncertainty</td><td>ROC-AUC, PR-AUC, KS, confusion matrix and bootstrap confidence intervals.</td><td>Why accuracy is misleading for imbalanced default data.</td></tr>
-   <tr><td>Probability calibration</td><td>Reliability curve, Brier score, log loss; sigmoid vs isotonic calibration using validation-only or cross-validated predictions.</td><td>Ranking is not the same as accurate probability of default.</td></tr>
-   <tr><td>Decision economics</td><td>Threshold/cost matrix and expected-loss sensitivity under explicitly hypothetical cost assumptions.</td><td>Model score → decision; assumptions are not real bank loss estimates.</td></tr>
-   <tr><td>Fairness diagnostics</td><td>Compare subgroup sample sizes, approval/flag rates, TPR/FPR and calibration by age/sex groups.</td><td>Identify disparities; do not claim regulatory compliance or make causal claims.</td></tr>
-   <tr><td>Explainability</td><td>Global and local SHAP explanations for the tree model; inspect correlated features and explanation limits.</td><td>Explain a prediction without presenting association as causation.</td></tr>
-   <tr><td>Monitoring</td><td>Feature drift report using a clearly labelled synthetic shifted dataset; optionally Evidently.</td><td>Demonstrate a monitoring workflow, not claim true temporal drift.</td></tr>
-   <tr><td>Engineering</td><td>Reusable src modules, CLI or Streamlit dashboard, pytest, deterministic seeds and GitHub Actions CI.</td><td>Reproducibility, maintainability and testing—not only notebook code.</td></tr>
+  <h2>Technical milestones</h2>
+  <div class="tablewrap"><table><thead><tr><th>When</th><th>Work</th><th>Exit criterion</th></tr></thead><tbody>
+   <tr><td>11 Nov</td><td>Run corrected Task 5C.1; validate exact-term, observed-support, Unanswered, coefficient, fit-only imputation and locked-test manifest outputs. Start Task 5D only if the gate passes.</td><td>Corrected outputs and a short QC note saved.</td></tr>
+   <tr><td>13 Nov</td><td>Task 5D product drivers, Unanswered sensitivity and term-pattern ablation.</td><td>Evidence-based interpretation; no causal claims.</td></tr>
+   <tr><td>14 Nov</td><td>Compare Logistic Regression with HistGradientBoosting; inspect calibration by group.</td><td>Same temporal split and comparable metrics; group counts disclosed.</td></tr>
+   <tr><td>15 Nov</td><td>Freeze candidate features and document point-in-time timing questions, model choice and limitations.</td><td>Feature-decision memo; locked test remains closed.</td></tr>
+   <tr><td>16–22 Nov</td><td>Protect applications, GRE, SOPs and LORs. Use at most one short project session for reproducibility or documentation.</td><td>Application work remains on schedule.</td></tr>
+   <tr><td>23–30 Nov</td><td>Clean scripts, pinned requirements, tests, README, model card and technical report.</td><td>Fresh-run instructions and reproducible aggregate outputs.</td></tr>
+   <tr><td>1–15 Dec</td><td>After the feature freeze, decide whether to open the locked test; finish dashboard/demo and final report only if application deadlines are protected.</td><td>Portfolio v1 target; no leakage or premature test tuning.</td></tr>
   </tbody></table></div>
-  <div class="callout danger"><b>Methodological honesty:</b> this UCI dataset is a cross-sectional client-level table with historical monthly features, not a clean sequence of dated monthly snapshots per borrower. Do not call a random split “out-of-time validation.” Use a stratified holdout and, if you demonstrate drift, label the shift as simulated.</div>
  </div>
-
  <div class="panel">
-  <h2>Daily build plan · one hour each day</h2>
-  <p class="hint">Tick a task only after the code runs and the output is saved. If a day slips, continue the next day; protect GRE and application deadlines.</p>
-  <div class="tablewrap"><table><thead><tr><th>Date</th><th>60-minute task</th><th>Deliverable / quality gate</th></tr></thead><tbody>
-   <tr><td>9 Nov</td><td>Define project question, repo, environment and README skeleton.</td><td>Repo exists; scope and limits are written.</td></tr>
-   <tr><td>10 Nov</td><td>Fetch UCI dataset; write data dictionary and source/licence citation.</td><td>Reproducible data-loading script; no private data.</td></tr>
-   <tr><td>11 Nov</td><td>EDA: target balance, missingness, feature types, distributions and data-quality checks.</td><td>EDA notebook with 3–5 useful findings, not just charts.</td></tr>
-   <tr><td>12 Nov</td><td>Define leakage-safe preprocessing and stratified train/validation/test split.</td><td>Split logic and leakage checks documented; test set held back.</td></tr>
-   <tr><td>13 Nov</td><td>Build logistic-regression pipeline and baseline metrics.</td><td>Saved baseline metrics and confusion matrix.</td></tr>
-   <tr><td>14 Nov</td><td>Add credit scorecard thinking: coefficient signs, binning; WoE/IV only if time.</td><td>Interpretable baseline note; explain feature handling.</td></tr>
-   <tr><td>15 Nov</td><td>Train one gradient-boosting challenger.</td><td>Same split and comparable preprocessing; no test-set tuning.</td></tr>
-   <tr><td>16 Nov</td><td>Compare ROC-AUC, PR-AUC, KS and bootstrap confidence intervals.</td><td>Model comparison table with uncertainty.</td></tr>
-   <tr><td>17 Nov</td><td>Calibration: reliability curve, Brier/log loss, sigmoid vs isotonic.</td><td>Calibration plot; explain why fit data must be separate/cross-validated.</td></tr>
-   <tr><td>18 Nov</td><td>Build threshold and hypothetical cost-sensitivity analysis.</td><td>Decision table; clearly label assumptions and limitations.</td></tr>
-   <tr><td>19 Nov</td><td>Fairness/subgroup diagnostic by age and sex with sample counts.</td><td>Subgroup metrics and caveats; no legal-compliance claim.</td></tr>
-   <tr><td>20 Nov</td><td>SHAP global summary and two local explanations.</td><td>Saved plots and explanation caveat.</td></tr>
-   <tr><td>21 Nov</td><td>Simulate feature shift and generate a drift report.</td><td>Before/after drift report labelled synthetic.</td></tr>
-   <tr><td>22 Nov</td><td>Build a simple Streamlit dashboard for model comparison and validation.</td><td>App runs locally with sample predictions/plots.</td></tr>
-   <tr><td>23 Nov</td><td>Refactor notebook logic into src modules and config.</td><td>Clean project structure; one command to reproduce key outputs.</td></tr>
-   <tr><td>24 Nov</td><td>Add unit tests for preprocessing, metrics, calibration and threshold logic.</td><td>pytest passes; edge cases included.</td></tr>
-   <tr><td>25 Nov</td><td>Add GitHub Actions CI and pinned dependencies.</td><td>Tests run on push; reproducible environment.</td></tr>
-   <tr><td>26 Nov</td><td>Run full pipeline from a clean environment; fix failures.</td><td>Fresh-clone test passes; final metrics frozen.</td></tr>
-   <tr><td>27 Nov</td><td>Write model card and 3–5 page validation report.</td><td>Purpose, data, methodology, results, limitations, monitoring recommendations.</td></tr>
-   <tr><td>28 Nov</td><td>Polish README, architecture diagram, screenshots and references.</td><td>Recruiter/admissions reviewer can understand it in 2 minutes.</td></tr>
-   <tr><td>29 Nov</td><td>Record a 3-minute walkthrough; deploy dashboard only if easy.</td><td>Demo link or video; local reproducibility remains primary.</td></tr>
-   <tr><td>30 Nov</td><td>Final code review, remove secrets, verify licence/citations and write CV bullet.</td><td>Public repo tagged v1.0; honest project status.</td></tr>
-  </tbody></table></div>
-  <h3 style="margin-top:14px">Daily completion tracker</h3>
-  <div class="task"><input type="checkbox" data-id="ts01"><label>9 Nov — scope, repo, environment and README</label></div>
-  <div class="task"><input type="checkbox" data-id="ts02"><label>10 Nov — UCI data loader, data dictionary and licence</label></div>
-  <div class="task"><input type="checkbox" data-id="ts03"><label>11 Nov — EDA and data-quality checks</label></div>
-  <div class="task"><input type="checkbox" data-id="ts04"><label>12 Nov — leakage-safe split and preprocessing</label></div>
-  <div class="task"><input type="checkbox" data-id="ts05"><label>13 Nov — logistic-regression baseline</label></div>
-  <div class="task"><input type="checkbox" data-id="ts06"><label>14 Nov — scorecard interpretation / optional WoE</label></div>
-  <div class="task"><input type="checkbox" data-id="ts07"><label>15 Nov — gradient-boosting challenger</label></div>
-  <div class="task"><input type="checkbox" data-id="ts08"><label>16 Nov — ROC-AUC, PR-AUC, KS and bootstrap CIs</label></div>
-  <div class="task"><input type="checkbox" data-id="ts09"><label>17 Nov — probability calibration and reliability curve</label></div>
-  <div class="task"><input type="checkbox" data-id="ts10"><label>18 Nov — threshold and cost-sensitivity analysis</label></div>
-  <div class="task"><input type="checkbox" data-id="ts11"><label>19 Nov — subgroup/fairness diagnostics</label></div>
-  <div class="task"><input type="checkbox" data-id="ts12"><label>20 Nov — SHAP explanations</label></div>
-  <div class="task"><input type="checkbox" data-id="ts13"><label>21 Nov — synthetic drift monitoring</label></div>
-  <div class="task"><input type="checkbox" data-id="ts14"><label>22 Nov — Streamlit dashboard</label></div>
-  <div class="task"><input type="checkbox" data-id="ts15"><label>23 Nov — refactor into reusable modules</label></div>
-  <div class="task"><input type="checkbox" data-id="ts16"><label>24 Nov — pytest unit tests</label></div>
-  <div class="task"><input type="checkbox" data-id="ts17"><label>25 Nov — GitHub Actions CI</label></div>
-  <div class="task"><input type="checkbox" data-id="ts18"><label>26 Nov — clean environment end-to-end run</label></div>
-  <div class="task"><input type="checkbox" data-id="ts19"><label>27 Nov — model card and validation report</label></div>
-  <div class="task"><input type="checkbox" data-id="ts20"><label>28 Nov — README, architecture and screenshots</label></div>
-  <div class="task"><input type="checkbox" data-id="ts21"><label>29 Nov — demo walkthrough / optional deployment</label></div>
-  <div class="task"><input type="checkbox" data-id="ts22"><label>30 Nov — final QA, licence check and CV bullet</label></div>
+  <h2>Completion tracker</h2>
+  <p class="hint">Completed boxes reflect work already evidenced in the saved project packages. Tick pending tasks only after the corresponding outputs are saved and checked.</p>
+  <div class="task"><input type="checkbox" data-id="sba01"><label>Public SBA source and snapshot provenance recorded</label></div>
+  <div class="task"><input type="checkbox" data-id="sba02"><label>Data audit, fixed-horizon cohort and temporal split completed</label></div>
+  <div class="task"><input type="checkbox" data-id="sba03"><label>Task 3 interpretability and Task 4 feature enrichment completed</label></div>
+  <div class="task"><input type="checkbox" data-id="sba04"><label>Task 5A experiments A–F completed</label></div>
+  <div class="task"><input type="checkbox" data-id="sba05"><label>Task 5B exact-term anomaly audit completed</label></div>
+  <div class="task"><input type="checkbox" data-id="sba06"><label>Initial Task 5C adjusted analysis completed (provisional)</label></div>
+  <div class="task"><input type="checkbox" data-id="sba07"><label>Corrected Task 5C.1 run completed and verified</label></div>
+  <div class="task"><input type="checkbox" data-id="sba08"><label>Task 5D product-driver and term-pattern ablation analysis completed</label></div>
+  <div class="task"><input type="checkbox" data-id="sba09"><label>Logistic vs HistGradientBoosting and group calibration compared</label></div>
+  <div class="task"><input type="checkbox" data-id="sba10"><label>Point-in-time feature review and final feature decisions documented</label></div>
+  <div class="task"><input type="checkbox" data-id="sba11"><label>Reproducible scripts, requirements and automated tests verified</label></div>
+  <div class="task"><input type="checkbox" data-id="sba12"><label>Model card, technical report, dashboard/demo and CV-ready summary completed</label></div>
  </div>
-
  <div class="panel">
-  <h2>How to use ChatGPT for each one-hour session</h2>
-  <ol>
-   <li><b>First 5 minutes:</b> ask ChatGPT to break today's task into the smallest implementation steps.</li>
-   <li><b>Next 35 minutes:</b> implement one module at a time. Ask for code with explanations and expected outputs.</li>
-   <li><b>Next 15 minutes:</b> run tests, inspect outputs and ask ChatGPT to review errors or challenge assumptions.</li>
-   <li><b>Final 5 minutes:</b> commit to GitHub and write a short note explaining what you learned.</li>
-  </ol>
-  <div class="codeprompt" id="techPrompt">Act as my senior credit-risk model validation reviewer and Python pair-programmer. I have exactly 60 minutes for today's milestone. First ask me what is already implemented, then give me the smallest next task. Explain each design decision. Do not invent metrics or results. Require me to run the code and show the output before moving on. Review for target leakage, train/test contamination, incorrect calibration, misleading fairness claims and reproducibility. Use only the public UCI Default of Credit Card Clients dataset. Clearly distinguish observed results from simulated drift or hypothetical cost assumptions. At the end, give me a concise commit message and 3 interview questions I should be able to answer.</div>
-  <button class="btn" id="copyTechPrompt">Copy daily ChatGPT prompt</button>
+  <h2>Reviewer prompt for the next technical session</h2>
+  <p class="hint">Use after the corrected Task 5C.1 outputs exist. Do not let a reviewer or an AI tool replace your own interpretation.</p>
+  <div class="codeprompt" id="techPrompt">Act as a senior credit-risk model validation reviewer. Review my independent SBA 7(a) public-data analysis using the September 30, 2026 snapshot. First verify the Task 5C.1 correction outputs and the FY2010–FY2013 fit / FY2014 validation boundary. Do not open or use FY2015–FY2016. Then help me design Task 5D: product-driver investigation, Unanswered business-age sensitivity, term-pattern ablation, Logistic Regression versus HistGradientBoosting, calibration by group and final feature decisions. Challenge point-in-time availability, unsupported combinations, sample-size issues, calibration and overfitting. Distinguish observed evidence from inference; never call association causal or odds ratios risk ratios. Ask me to explain each decision and do not invent results.</div>
+  <button class="btn" id="copyTechPrompt">Copy Project A review prompt</button>
  </div>
-
  <div class="panel">
-  <h2>What to show admissions committees</h2>
+  <h2>What admissions committees should see</h2>
   <ul>
-   <li>Public GitHub repository with clean commits, reproducible setup and passing CI.</li>
-   <li>Interactive dashboard or recorded demo.</li>
-   <li>Short model-validation report with methodology, results, caveats and monitoring recommendation.</li>
-   <li>One honest CV bullet with repository link; only state metrics after they are measured on the held-out test set.</li>
+   <li>An independent analysis of a public SBA portfolio dataset, with a documented source snapshot and temporal cohort construction.</li>
+   <li>Model comparison, calibration and a careful investigation of an unexpected product/term signal.</li>
+   <li>Reproducible scripts, tests, a short model card and a clear technical report.</li>
+   <li>Honest limitations: exploratory results are not causal, the reference repository is not yet reproduced, and the locked test is not used for model tuning.</li>
   </ul>
-  <p><b>Example CV line after completion:</b> “Built a reproducible credit-risk model validation workbench on a public benchmark, comparing an interpretable logistic scorecard with a tree-based challenger; evaluated discrimination, probability calibration, decision thresholds, subgroup performance and simulated feature drift; packaged the workflow with tests and CI.”</p>
-  <div class="callout warn">Do not use banking-sector customer data, internal models, proprietary code, confidential processes or employer documents. The project should be independently built on public data. Do not claim production deployment, regulatory approval, real bank impact or a real-world temporal backtest.</div>
+  <p><b>CV wording after the corrected analysis is complete:</b> “Developed an independent SBA 7(a) credit-risk analytics workflow using public FOIA data; constructed fixed-horizon temporal cohorts, compared feature sets and investigated product/term anomalies with model-validation diagnostics.” Add metrics only after corrected analysis and final validation are defensible.</p>
  </div>
 </section>
 
@@ -654,6 +584,7 @@ const key="fall2027_admissions_master_tracker_2026_11_10";
 let previous={};try{previous=JSON.parse(localStorage.getItem(oldKey)||"{}")}catch(e){}
 let state={};try{state=JSON.parse(localStorage.getItem(key)||"{}")}catch(e){}
 state.done=state.done||{};state.notes=state.notes||previous.notes||"";
+["pa1","pa2","pa3","pa4","pa5","sba01","sba02","sba03","sba04","sba05","sba06"].forEach(id=>{state.done[id]=true;});
 const dayPlan=[
 ["Mon 9 Nov","Admin foundation","Completed · archive sent evidence",[
 ["NITK digital transcript application email","Sent; official transcript still pending",true],
@@ -668,11 +599,13 @@ const dayPlan=[
 ["Spend one focused hour on Credit-Risk Validation Workbench","Create repo skeleton, scope and dataset plan"],
 ["Draft the master SOP narrative outline","EEE + IT minor → banking-sector credit risk/model validation → target role"],
 ["Shortlist IELTS Academic test seats for 1–5 Dec","Not booked; user plans to book before 15 Dec"]]],
-["Wed 11 Nov","GRE Quant diagnostic","Free day · use your notes from the other page",[
-["Take a timed GRE Quant diagnostic","Record score, timing and topic-level accuracy"],
-["Create the Quant error log","Concept gap / careless error / time pressure / correction"],
-["Identify the three highest-impact weak topics","Set the next three revision blocks"],
-["Check 26 Nov GRE seat and official score timing","Target remains provisional; not booked"]]],
+["Wed 11 Nov","Project A correction + course decision","Free day · 5–6 focused hours; Task 5D is conditional",[
+["Run corrected Task 5C.1","Use the Task 4 enriched cohort; do not substitute the 15-column base cohort. Save all corrected outputs and the run manifest.","","nov11_task5c"],
+["Pass the Task 5C quality gate","Check full exact-term groups, observed-support term/revolver analysis, Unanswered outcomes/coefficient, fit-only imputation and locked-test status. If any check fails, fix it before Task 5D.","","nov11_task5c_gate"],
+["Start Task 5D only if Task 5C.1 passes","Product-driver investigation, Unanswered sensitivity and term-pattern ablation. Keep FY2015–FY2016 locked.","","nov11_task5d"],
+["Choose the graded statistics/probability course and one supplementary certificate","Prioritise a credible graded option within budget; compare the next NPTEL IIT Delhi offering, ASU/RWU credit courses and the University of Michigan non-credit certificate. Do not pay before admissions guidance.","","nov11_course"],
+["Call the professor who asked for a 11 Nov follow-up; secure a backup LOR","Project work must not displace the December-deadline recommender follow-up.","","nov11_lor"],
+["Take a timed GRE Quant diagnostic and start the error log","45-minute diagnostic; record topic accuracy, timing and the three highest-impact gaps. Keep the 26 Nov target provisional.","","nov11_gre"]]],
 ["Thu 12 Nov","CV Part 2 + statistics course + GRE plan","Free day · 3–4 focused hours · main CV refinement session",[
 ["Strengthen ANZ experience bullets","Document your exact ownership, technical work, scale and outcomes; use only verified, non-confidential figures. Separate what you built from what the wider team delivered.","","nov12_cv2_anz"],
 ["Shortlist a graded university-level statistics/probability course","Compare transcript/credit, syllabus, assessment, duration and cost; check programme acceptance in writing before paying or enrolling.","","nov12_cv2_stats"],
