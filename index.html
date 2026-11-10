@@ -82,8 +82,8 @@ textarea,input[type=text]{width:100%;border:1px solid #cbd6e5;border-radius:9px;
 <div class="barbg"><div class="bar" id="progress"></div></div>
 <div class="panel" id="today-plan" style="border:2px solid #315fb8;margin:14px 0">
  <div class="cardhead"><h2>Application progress · 10 November 2026</h2><span class="pill green">Basic CV + LOR pack prepared</span></div>
- <p class="hint">Confirmed by you: your basic CV is done and the LOR evidence pack is prepared. The main substantive work still open is SOP writing and the technical project.</p>
- <div class="callout good"><b>CV:</b> Basic master CV completed for now. Later work is targeted tailoring and evidence/metrics, not rebuilding it.</div>
+ <p class="hint">Confirmed by you: the basic CV is complete. Thursday 12 November is reserved for CV Part 2: strengthen the evidence in your ANZ experience, improve project descriptions and individual contributions, verify project dates and titles, reassess school experience, shortlist a graded statistics course, and build a higher-GRE-score plan.</p>
+ <div class="callout good"><b>CV Part 2 · Thu 12 Nov:</b> Improve the existing master CV rather than rebuilding it. Priorities: evidence-led ANZ bullets; graded statistics/probability course; project methods and individual contributions; verified project dates and accurate titles; school experience review; GRE high-score plan.</div>
  <div class="callout good"><b>LOR evidence pack:</b> Prepared and shared with one professor. The pack is ready, but recommendation letters are not yet secured for all applications.</div>
  <div class="callout warn"><b>Referee constraint:</b> One professor can support up to three applications with deadlines after 30 Dec 2026 only. This will not cover December deadlines. Another professor's response is pending; call back on 11 Nov as requested. Identify a backup academic referee for earlier deadlines.</div>
  <div class="task"><input type="checkbox" data-id="nov10_sop"><label><b>1. SOP — remaining priority</b><small>Build the Quant Finance/Quant Risk and Financial Data Science/Analytics core narratives, then tailor them to the earliest deadlines. Do not describe planned project work as completed.</small></label></div>
@@ -620,7 +620,7 @@ textarea,input[type=text]{width:100%;border:1px solid #cbd6e5;border-radius:9px;
  </div>
 </section>
 
-<p class="foot">Tracker version: 9 November 2026. It is a planning tool, not a live university portal or calendar sync. Checked boxes and notes are stored in this browser. Dates, course prices, fees and requirements can change; verify official pages before paying or submitting. The project roadmaps are recommendations based on your existing application playbook; no actual repository/codebase was available for a code review.</p>
+<p class="foot">Tracker version: 10 November 2026. It is a planning tool, not a live university portal or calendar sync. Checked boxes and notes are stored in this browser. Dates, course prices, fees and requirements can change; verify official pages before paying or submitting. The project roadmaps are recommendations based on your existing application playbook; no actual repository/codebase was available for a code review.</p>
 </main>
 <script>
 const oldKey="fall2027_admissions_master_tracker_2026_11_09";
@@ -647,11 +647,13 @@ const dayPlan=[
 ["Create the Quant error log","Concept gap / careless error / time pressure / correction"],
 ["Identify the three highest-impact weak topics","Set the next three revision blocks"],
 ["Check 26 Nov GRE seat and official score timing","Target remains provisional; not booked"]]],
-["Thu 12 Nov","SOP + statistics-course decision","Free day · 3–4 focused hours",[
-["Build the Quant Finance SOP outline","Use truthful banking-sector/model-validation examples"],
-["Shortlist two graded university-level probability/statistics courses","Do not pay before acceptance is checked"],
-["Check Prof. Sowmya and second professor leave/return status","Request LOR only after they are available"],
-["Continue Credit-Risk Validation Workbench for one hour","Data dictionary and reproducible data-loading plan"]]],
+["Thu 12 Nov","CV Part 2 + statistics course + GRE plan","Free day · 3–4 focused hours · main CV refinement session",[
+["Strengthen ANZ experience bullets","Document your exact ownership, technical work, scale and outcomes; use only verified, non-confidential figures. Separate what you built from what the wider team delivered.","","nov12_cv2_anz"],
+["Shortlist a graded university-level statistics/probability course","Compare transcript/credit, syllabus, assessment, duration and cost; check programme acceptance in writing before paying or enrolling.","","nov12_cv2_stats"],
+["Improve project descriptions and individual contributions","For each selected project, record the problem, methods/tools, your personal contribution, team contribution, evaluation/results and what you can defend in an interview.","","nov12_cv2_projects"],
+["Verify project dates, CV headline and role/project titles","Add accurate month/year dates where available; use official leadership/job titles and a focused, truthful CV headline. Do not guess missing dates or titles.","","nov12_cv2_dates_titles"],
+["Reassess school operations and digital-support experience","Decide whether the school website, Excel tools and administrative support belong in the master CV; verify dates, role, responsibilities and evidence before inclusion.","","nov12_cv2_school"],
+["Build the GRE high-score preparation plan","Use the 11 Nov diagnostic and error log to set a realistic Q169–170 target, identify weak areas and schedule timed Quant and Verbal practice; 26 Nov remains provisional, not booked.","","nov12_cv2_gre"]]],
 ["Fri 13 Nov","Workday · light admin","45–60 min maximum",[
 ["Check for Manchester, UT MSBTAI, Georgia Tech and UCD replies","Update status only if a new written response arrives"],
 ["Review 10 GRE error-log questions","Short maintenance block"],
@@ -667,7 +669,7 @@ const dayPlan=[
 ["Review all application priorities for 16–22 Nov","Protect early deadlines and LOR lead time"]]]
 ];
 const daily=document.getElementById("daily");let dailyIds=[];
-dayPlan.forEach((d,i)=>{let box=document.createElement("div");box.className="day";box.innerHTML=`<div class="dayhead"><span>${d[0]} · ${d[1]}</span><span class="pill">${d[2]}</span></div><div class="daybody"></div>`;d[3].forEach((t,j)=>{let id=`day${i}_${j}`;dailyIds.push(id);if(t[2]===true)state.done[id]=true;let row=document.createElement("div");row.className="task";row.innerHTML=`<input type="checkbox" data-id="${id}"><label><b>${t[0]}</b><small>${t[1]}</small></label>`;box.querySelector(".daybody").appendChild(row)});daily.appendChild(box)});
+dayPlan.forEach((d,i)=>{let box=document.createElement("div");box.className="day";box.innerHTML=`<div class="dayhead"><span>${d[0]} · ${d[1]}</span><span class="pill">${d[2]}</span></div><div class="daybody"></div>`;d[3].forEach((t,j)=>{let id=t[3]||`day${i}_${j}`;dailyIds.push(id);if(t[2]===true)state.done[id]=true;let row=document.createElement("div");row.className="task";row.innerHTML=`<input type="checkbox" data-id="${id}"><label><b>${t[0]}</b><small>${t[1]}</small></label>`;box.querySelector(".daybody").appendChild(row)});daily.appendChild(box)});
 document.querySelectorAll(".tabs button").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll(".tabs button").forEach(x=>x.classList.toggle("active",x===b));document.querySelectorAll(".view").forEach(v=>v.classList.toggle("active",v.id===b.dataset.tab))}));
 function bindChecks(){document.querySelectorAll('input[type="checkbox"][data-id]').forEach(el=>{let id=el.dataset.id;el.checked=!!state.done[id];el.closest(".task")?.classList.toggle("done",el.checked);el.onchange=()=>{state.done[id]=el.checked;el.closest(".task")?.classList.toggle("done",el.checked);save();update()}})}
 function save(){try{localStorage.setItem(key,JSON.stringify(state))}catch(e){}}
