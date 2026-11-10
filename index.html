@@ -1,0 +1,701 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Fall 2027 Admissions Master Tracker</title>
+<style>
+:root{--bg:#f3f6fb;--card:#fff;--ink:#17243b;--muted:#63738a;--line:#e1e8f2;--blue:#2458d7;--navy:#14294f;--green:#13815d;--amber:#a86508;--red:#b83a4a;--soft:#f7f9fd}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif}
+main{max-width:1240px;margin:auto;padding:24px 18px 70px}.hero{background:linear-gradient(125deg,#14264a,#315eb4);color:white;padding:28px 32px;border-radius:22px;margin-bottom:16px}.hero h1{font-size:30px;line-height:1.15;margin:6px 0}.hero p{color:#dce7ff;max-width:900px;margin:7px 0}.eyebrow{text-transform:uppercase;letter-spacing:.12em;font-size:11px;font-weight:800;opacity:.8}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:14px 0}.stat,.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:17px}.stat .num{font-size:27px;font-weight:850;line-height:1.2}.stat small{color:var(--muted)}.panel{margin-bottom:16px}.layout{display:grid;grid-template-columns:1.45fr .85fr;gap:16px}.layout.equal{grid-template-columns:1fr 1fr}
+h2{font-size:19px;margin:0 0 10px}h3{font-size:15px;margin:0 0 7px}.hint,.muted{color:var(--muted);font-size:13px}.tabs{display:flex;gap:7px;flex-wrap:wrap;margin:17px 0}.tabs button,.filter button{border:1px solid #cbd6e8;border-radius:999px;padding:9px 13px;background:white;color:#3b506d;font-weight:750;cursor:pointer}.tabs button.active,.filter button.active{background:#234eaa;color:white;border-color:#234eaa}
+.view{display:none}.view.active{display:block}.barbg{height:9px;background:#e6ebf4;border-radius:99px;overflow:hidden}.bar{height:100%;background:#1d9a6e;width:0;transition:width .2s}.callout{padding:13px 15px;border-radius:10px;background:#eef5ff;border-left:4px solid #5789d8;margin:12px 0;font-size:14px}.warn{background:#fff7e9;border-left-color:#d99a32}.danger{background:#fff0f1;border-left-color:#c74b5b}.good{background:#ecf8f2;border-left-color:#2a9b72}
+.pill{display:inline-block;padding:3px 8px;border-radius:99px;font-size:11px;font-weight:800;background:#edf1f7;color:#59677b}.pill.green{background:#e5f6ee;color:#16704f}.pill.amber{background:#fff1d8;color:#8b5a0a}.pill.red{background:#ffe9eb;color:#a83241}.pill.blue{background:#e9efff;color:#3157a6}
+.task{display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-bottom:1px solid #edf1f6}.task:last-child{border:0}.task input{width:18px;height:18px;margin-top:3px;accent-color:#16845e;flex-shrink:0}.task label{flex:1;cursor:pointer}.task small{display:block;color:var(--muted)}.task.done label{text-decoration:line-through;color:#8290a4}
+.day{border:1px solid var(--line);border-radius:13px;overflow:hidden;margin:10px 0}.dayhead{display:flex;justify-content:space-between;gap:8px;align-items:center;background:#f8faff;padding:11px 13px;font-weight:800}.daybody{padding:6px 13px}
+table{width:100%;border-collapse:collapse;font-size:13px}th,td{text-align:left;vertical-align:top;padding:10px 9px;border-bottom:1px solid var(--line)}th{background:#f7f9fd;color:#52627b;position:sticky;top:0}td a{color:#2358bc}.tablewrap{overflow:auto;max-height:600px;border:1px solid var(--line);border-radius:11px}
+.carditem{border:1px solid var(--line);border-radius:13px;padding:15px;margin:10px 0;background:#fff}.carditem p{margin:6px 0;font-size:13px;color:#4e5f77}.cardhead{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;flex-wrap:wrap}
+ul{padding-left:20px;margin:7px 0}li{margin:4px 0}.links{display:flex;gap:8px;flex-wrap:wrap}.links a{font-size:13px;text-decoration:none;border:1px solid #d7e1ef;background:#f8faff;padding:7px 10px;border-radius:8px;color:#2457ac}
+textarea,input[type=text]{width:100%;border:1px solid #cbd6e5;border-radius:9px;padding:10px;font:inherit}textarea{min-height:100px}.btn{background:#244fa8;color:#fff;border:0;border-radius:9px;padding:10px 14px;font-weight:750;cursor:pointer}.btn.secondary{background:#edf2fb;color:#28466e;border:1px solid #d4deed}.foot{font-size:12px;color:#718096;margin-top:16px}.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}.kpi{padding:11px;background:#f8faff;border:1px solid var(--line);border-radius:10px}.kpi b{display:block;font-size:18px}.codeprompt{white-space:pre-wrap;background:#f6f8fc;border:1px solid #dfe6f1;padding:12px;border-radius:10px;font:13px/1.5 ui-monospace,monospace}
+@media(max-width:850px){.layout,.layout.equal,.two{grid-template-columns:1fr}.grid{grid-template-columns:repeat(2,1fr)}.hero{padding:22px}.hero h1{font-size:25px}}
+@media print{.tabs,.btn{display:none}.view{display:block!important}.hero{background:#eef3fb;color:#17243b}.hero p{color:#34445f}}
+
+
+.public-note{background:#fffaf0;border:1px solid #f1d9a4;color:#583e18;border-radius:14px;padding:14px 18px;margin:0 0 16px;font-size:13px}.public-note a{color:#1d4ed8;font-weight:750}.private-source{color:#667085;font-style:italic}.site-nav{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:white;padding:11px 16px;border:1px solid #e1e8f2;border-radius:14px;margin-bottom:16px}.site-nav a{color:#2458d7;font-weight:700;text-decoration:none}.site-nav a:hover{text-decoration:underline}.site-nav small{color:#63738a}.import-control{display:inline-flex;align-items:center;gap:7px;border-radius:10px;border:1px solid #cbd6e8;background:white;padding:8px 11px;cursor:pointer;font-weight:750;font-size:13px;color:#2458d7}.import-control input{display:none}
+</style>
+</head>
+<body><main><div class="site-nav"><span><strong>Admissions HQ</strong> · Fall 2027</span><span><a href="index.html">Dashboard</a> &nbsp; <a href="requirements.html">Requirements matrix</a></span><small>Updated 10 November 2026 · hosted by GitHub Pages</small></div>
+<header class="hero">
+ <div class="eyebrow">Fall 2027 · Admissions execution system · India time</div>
+ <h1>Be application-ready before the deadline</h1>
+ <p>Updated 10 November 2026 · admissions responses and actions through 10 November · application window through 20 January 2027. A complete plan for SOPs, LORs, GRE, IELTS/MOI, university research, transcripted coursework, two GitHub projects and carefully selected specialist credentials.</p>
+ <p><strong>Your weekly availability:</strong> Monday–Thursday and Sunday are study days; Friday and Saturday are workdays. Use free days for deep work and keep workdays light.</p>
+</header><div class="public-note" role="note"><strong>Public-site safety:</strong> This site contains planning information only. Do not enter passport details, emails, grades, recommender contacts or other confidential data in shared screenshots or repository files. Task checkboxes and notes stay in this browser's local storage, not in GitHub. <a href="requirements.html">Requirements matrix</a></div>
+<div class="panel" style="border:2px solid #315fb8;margin-bottom:14px">
+ <div class="cardhead"><b>Live admissions status · updated 10 November 2026</b><span class="tag green">Latest email check</span></div>
+ <div class="grid" style="grid-template-columns:repeat(4,1fr)">
+  <div class="stat"><div class="num">3</div><small>Programme-specific English exemptions confirmed</small></div>
+  <div class="stat"><div class="num">2</div><small>English tests explicitly required (Purdue, Manchester)</small></div>
+  <div class="stat"><div class="num">submitted</div><small>UCD enquiry received · awaiting answer</small></div>
+  <div class="stat"><div class="num">11 Nov</div><small>GRE Quant diagnostic · use your existing notes</small></div>
+ </div>
+ <div class="two">
+  <div>
+   <h3>English exemptions confirmed</h3>
+   <ul>
+    <li><b>Toronto MScAC:</b> NITK institution-wide MOI certificate accepted; attach it after starting the application and add the public NITK link in Additional Information. <span class="private-source">Written email on file</span></li>
+    <li><b>BSE Master's in Data Science:</b> Indian-university graduates exempt from English test. <span class="private-source">Written email on file</span></li>
+    <li><b>UT Austin on-campus MS Business Analytics &amp; AI (MSBAi):</b> India exemption confirmed. This is separate from MSBTAI. <span class="private-source">Written email on file</span></li>
+   </ul>
+  </div>
+  <div>
+   <h3>Pending / action required</h3>
+   <ul>
+    <li><b>Manchester QF:</b> semester grade-card PDF sent for preliminary review; official NITK transcript requested 9 Nov and not yet received. IELTS is required before an offer. <span class="private-source">Written email on file</span></li>
+    <li><b>Purdue MSBAIM:</b> English waiver explicitly refused; IELTS/TOEFL/Duolingo required. Enter all unofficial test details before submitting. <span class="private-source">Written email on file</span></li>
+    <li><b>Georgia Tech QCF:</b> coordinator says rolling admissions/no fixed deadline; English query referred to Graduate Education. <span class="private-source">Written email on file</span></li>
+    <li><b>UCD B746 Financial Data Science / B158 Quantitative Finance:</b> portal enquiry submitted; reference submitted; reply pending.</li>
+    <li><b>UT Austin MSBTAI:</b> separate MOI/India exemption enquiry sent 10 Nov; reply pending. <span class="private-source">Written email on file</span></li>
+    <li><b>Edinburgh FMO:</b> admissions cannot pre-assess; no application fee; apply with complete evidence for a definitive decision. <span class="private-source">Written email on file</span></li>
+   </ul>
+  </div>
+ </div>
+ <div class="callout warn"><b>Test plan:</b> IELTS Academic target sitting 1–5 December 2026; not booked. Book before 15 December. GRE Quant diagnostic 11 November using your notes; 26 November remains a provisional GRE test target, not booked.</div>
+ <div class="callout good"><b>Completed 10 Nov:</b> Manchester grade cards sent; UCD enquiry submitted (submitted); UT MSBTAI English enquiry sent; three confirmed English exemptions documented in the Google Drive tracker.</div>
+ <p><b>Detailed programme matrix:</b> <a href="requirements.html">Open full admissions requirement matrix</a></p>
+</div>
+<div class="grid">
+ <div class="stat"><div class="num" id="pct">0%</div><small>All tracker tasks completed</small></div>
+ <div class="stat"><div class="num" id="count">0 / 0</div><small>Checklist progress</small></div>
+ <div class="stat"><div class="num">26 Nov</div><small>GRE target · not booked</small></div>
+ <div class="stat"><div class="num">1–5 Dec</div><small>IELTS target window · not booked</small></div>
+</div>
+<div class="barbg"><div class="bar" id="progress"></div></div>
+<div class="tabs">
+ <button class="active" data-tab="overview">Overview</button>
+ <button data-tab="week">Weekly plan</button>
+ <button data-tab="sop">SOP & LOR</button>
+ <button data-tab="universities">Universities</button>
+ <button data-tab="projects">Two GitHub projects</button>
+ <button data-tab="techsprint">22-day technical sprint</button>
+ <button data-tab="courses">Courses & prerequisites</button>
+ <button data-tab="certs">Fast niche wins</button>
+ <button data-tab="tests">GRE & IELTS</button>
+ <button data-tab="review">Evidence & notes</button>
+</div>
+
+<section class="view active" id="overview">
+ <div class="callout warn"><strong>Reality check:</strong> no certificate or project can guarantee that you will be above the admitted-student average at every university. We can build evidence that is stronger than a minimum-eligibility file. Only use published cohort benchmarks where they exist; for other programmes, do not invent averages.</div>
+ <div class="layout">
+  <div class="panel">
+   <h2>Priority order — do not dilute your time</h2>
+   <div class="task"><input type="checkbox" data-id="ov1"><label><b>1. GRE and time-sensitive applications</b><small>GRE diagnostic 11 Nov; target Q169–170. Toronto 1 Dec is fixed; Georgia Tech coordinator says rolling review; Manchester staged dates need portal confirmation.</small></label></div>
+   <div class="task"><input type="checkbox" data-id="ov2"><label><b>2. SOPs, CV and LORs</b><small>Build two strong core narratives and tailor them to each programme; professors are currently on leave.</small></label></div>
+   <div class="task"><input type="checkbox" data-id="ov3" checked><label><b>3. English/MOI decisions</b><small>Three programme-specific exemptions confirmed; Purdue and Manchester require a test; Georgia Tech, UCD and UT MSBTAI are pending.</small></label></div>
+   <div class="task"><input type="checkbox" data-id="ov4"><label><b>4. Graded probability/statistics course</b><small>Get programme acceptance in writing before paying for a course.</small></label></div>
+   <div class="task"><input type="checkbox" data-id="ov5"><label><b>5. Project A scope and GitHub setup</b><small>Build the credit-risk validation project in December, after application deadlines are protected.</small></label></div>
+   <div class="task"><input type="checkbox" data-id="ov6"><label><b>6. Project B and one specialist credential</b><small>Project B starts in January; do not stack multiple certificates during the application sprint.</small></label></div>
+  </div>
+  <aside class="panel">
+   <h2>Profile snapshot used in this plan</h2>
+   <div class="kpi"><b>8.67 / 10</b><span class="muted">NITK B.Tech EEE + IT minor</span></div>
+   <div class="kpi" style="margin-top:8px"><b>banking-sector credit risk</b><span class="muted">Wholesale credit risk, model validation and automation; Python, R, SQL, C++ exposure</span></div>
+   <div class="kpi" style="margin-top:8px"><b>GRE 316</b><span class="muted">Q162 / V154 baseline; Q170 target</span></div>
+   <div class="callout good"><b>Your best differentiator:</b> combine real credit-risk/model-validation experience with rigorous probability/statistics evidence, reproducible code and a clear finance/analytics career story.</div>
+  </aside>
+ </div>
+ <div class="panel">
+  <h2>Published benchmark vs practical targets</h2>
+  <p><b>Georgia Tech QCF:</b> the working playbook records a Fall 2025 average GRE Quant of 169 and average undergraduate GPA of 3.681. Your practical target is Q169–170. Do not convert 8.67/10 to a US GPA without an official conversion.</p>
+  <p><b>Other programmes:</b> use prerequisite depth, course grades, project quality, work evidence and application quality. Their cohort averages are not established in this tracker.</p>
+  <div class="callout warn"><b>GRE timing risk:</b> ETS says official GRE scores take 8–10 days. A 26 Nov test could produce scores around 4–6 Dec, which is tight for Georgia Tech QCF (5 Dec) and Manchester (6 Dec). Ask whether self-reported/unofficial scores can be used initially, or check an earlier seat only if your mock scores justify it.</div>
+ </div>
+</section>
+
+<section class="view" id="week">
+ <div class="panel"><h2>Week 1 · 9–15 November</h2><p class="hint">Deep-work days: Mon–Thu and Sun. Workdays: Fri/Sat. Shift exact hours around your work schedule.</p>
+ <div id="daily"></div></div>
+ <div class="panel"><h2>Forward plan — finish early, not on the deadline</h2>
+ <div class="tablewrap"><table><thead><tr><th>Period</th><th>Primary output</th><th>Target completion</th></tr></thead><tbody>
+ <tr><td>16–22 Nov</td><td>GRE mock gate; two SOP cores; recommender availability and commitments; course approval emails; rolling applications started.</td><td>22 Nov</td></tr>
+ <tr><td>23–29 Nov</td><td>GRE retake if ready; Georgia Tech and Manchester essays; MScAC application ready; Project A repo skeleton.</td><td>29 Nov</td></tr>
+ <tr><td>30 Nov–6 Dec</td><td>Submit MScAC, Georgia Tech QCF and Manchester QF; no project feature creep.</td><td>2–3 days before each deadline</td></tr>
+ <tr><td>7–13 Dec</td><td>Purdue/Edinburgh applications; start transcripted course if approved; Project A baseline; IELTS only if waiver fails.</td><td>13 Dec</td></tr>
+ <tr><td>14–20 Dec</td><td>Purdue and Edinburgh due; Project A validation metrics; prepare January applications.</td><td>12–13 Dec for 15 Dec deadlines</td></tr>
+ <tr><td>21–31 Dec</td><td>Publish Project A v1; complete January SOPs; referee reminders; choose one or two quick, relevant credentials only if applications are on schedule.</td><td>31 Dec</td></tr>
+ <tr><td>1–20 Jan</td><td>ESSEC, UT Austin, BSE, Rotman submissions; begin Project B only after applications are safe.</td><td>5–7 days early</td></tr>
+ </tbody></table></div></div>
+</section>
+
+<section class="view" id="sop">
+ <div class="layout">
+  <div class="panel"><h2>SOP system — two master narratives</h2>
+   <div class="carditem"><div class="cardhead"><b>Core SOP A · Quant finance / quantitative risk</b><span class="pill blue">QCF track</span></div>
+    <p>Engineering mathematics and IT foundation → banking-sector credit-risk and model-validation exposure → what you learned about model assumptions, uncertainty and risk → deeper probability, numerical methods and financial mathematics → target roles in quantitative risk, derivatives analytics or quant development.</p>
+    <p><b>Tailor for:</b> Georgia Tech QCF, Manchester QF, UCD QF, Edinburgh FMO/CMF, Bocconi MAFINRISK, EDHEC Financial Engineering, Exeter FinTech.</p></div>
+   <div class="carditem"><div class="cardhead"><b>Core SOP B · Financial data science / analytics</b><span class="pill blue">FDS / BA track</span></div>
+    <p>EEE + IT foundation → credit-risk analytics and automation → how reliable data, inference and model governance change business decisions → advanced statistical learning/data engineering → target roles in financial data science, risk analytics or applied ML.</p>
+    <p><b>Tailor for:</b> UCD FDS, Trinity BA&AI, Warwick BA&AI, Purdue MSBAIM, UT Austin MSBTAI, BSE, ESSEC DSBA, Exeter Finance & Data Science.</p></div>
+   <h3>Every SOP must include</h3>
+   <ul><li>Specific course modules, faculty/labs or programme structure that connect to a skill gap—not generic prestige.</li><li>One or two verifiable banking-sector examples with quantified impact only where permitted and documented.</li><li>One completed project contribution, with honest status and your own technical decisions.</li><li>A realistic post-master's role and geography; connect the programme to that outcome.</li><li>Why this degree now, rather than another generic analytics degree.</li></ul>
+   <div class="callout danger">Never disclose banking-sector confidential data, internal model details, customer information or proprietary code. Describe your role at a high level and use independently built public/synthetic projects for technical proof.</div>
+  </div>
+  <aside class="panel"><h2>SOP & application checklist</h2>
+   <div class="task"><input type="checkbox" data-id="sop1"><label>Build evidence inventory: courses, grades, banking-sector achievements, technical tools and projects</label></div>
+   <div class="task"><input type="checkbox" data-id="sop2"><label>Update one-page CV with quantified, verified impact</label></div>
+   <div class="task"><input type="checkbox" data-id="sop3"><label>Draft Core SOP A — quant finance</label></div>
+   <div class="task"><input type="checkbox" data-id="sop4"><label>Draft Core SOP B — financial data science</label></div>
+   <div class="task"><input type="checkbox" data-id="sop5"><label>Create programme-specific course/module matrix</label></div>
+   <div class="task"><input type="checkbox" data-id="sop6"><label>Prepare MScAC statement and submit-ready documents</label></div>
+   <div class="task"><input type="checkbox" data-id="sop7"><label>Prepare Georgia Tech QCF essay, project answer and programming answer</label></div>
+   <div class="task"><input type="checkbox" data-id="sop8"><label>Prepare Manchester QF SOP and mathematics evidence</label></div>
+   <div class="task"><input type="checkbox" data-id="sop9"><label>Prepare January SOP variants for ESSEC, UT, BSE and Rotman</label></div>
+   <div class="task"><input type="checkbox" data-id="sop10"><label>Proofread each SOP against word limits and programme-specific prompts</label></div>
+  </aside>
+ </div>
+ <div class="panel"><h2>LOR plan</h2>
+  <div class="callout warn">Prof. Sowmya Kamath and the second professor are on leave. Do not keep sending requests while they are away. Check their return/availability on 10–11 Nov; send the prepared requests on the first suitable working day after they return.</div>
+  <div class="tablewrap"><table><thead><tr><th>Referee</th><th>Role</th><th>Status</th><th>Next action</th></tr></thead><tbody>
+  <tr><td>Prof. Sowmya Kamath</td><td>Academic / relevant subject</td><td><span class="pill amber">On leave</span></td><td>Send request when back; provide tailored evidence pack.</td></tr>
+  <tr><td>Second NITK professor</td><td>IT/programming or quantitative subject</td><td><span class="pill amber">On leave</span></td><td>Send request when back; ideally demonstrate technical work.</td></tr>
+  <tr><td>Backup academic referee</td><td>Math/engineering/IT</td><td><span class="pill">Not confirmed</span></td><td>Identify a third academic option.</td></tr>
+  <tr><td>banking-sector manager</td><td>Professional referee if programme accepts</td><td><span class="pill">Not confirmed</span></td><td>Check programme rules and workplace comfort before asking.</td></tr>
+  </tbody></table></div>
+  <h3 style="margin-top:12px">LOR packet checklist</h3>
+  <div class="task"><input type="checkbox" data-id="lor1"><label>Prepare CV, transcript and relevant course list</label></div>
+  <div class="task"><input type="checkbox" data-id="lor2"><label>Prepare 5 truthful examples of academic/technical strengths for each professor</label></div>
+  <div class="task"><input type="checkbox" data-id="lor3"><label>Prepare programme list, LOR count and internal deadlines</label></div>
+  <div class="task"><input type="checkbox" data-id="lor4"><label>Ask each recommender for permission and confirm availability</label></div>
+  <div class="task"><input type="checkbox" data-id="lor5"><label>Track portal links, submissions and reminders per university</label></div>
+  <p class="hint">Georgia Tech QCF requires three recommendations according to the current admissions playbook; verify each programme’s own count and whether professional referees are accepted.</p>
+ </div>
+</section>
+
+<section class="view" id="universities">
+ <div class="panel"><h2>Programme-by-programme strategy</h2><p class="hint">Deadlines and tiers below come from your existing Fall 2027 playbook. Verify each programme portal before submitting; internal targets are deliberately earlier.</p>
+ <input id="uniSearch" type="text" placeholder="Search university, programme, deadline or skill…">
+ <div class="tablewrap"><table id="uniTable"><thead><tr><th>Programme</th><th>Tier / deadline</th><th>Internal target</th><th>Evidence that strengthens your file</th><th>Primary project</th></tr></thead><tbody></tbody></table></div></div>
+ <div class="panel"><h2>College research checklist — do not compare only by ranking</h2>
+  <div class="two">
+   <div><div class="task"><input type="checkbox" data-id="uni1"><label>Verify exact 2027 deadline and round</label></div><div class="task"><input type="checkbox" data-id="uni2"><label>Verify GRE/IELTS/MOI policy in writing</label></div><div class="task"><input type="checkbox" data-id="uni3"><label>Check academic prerequisites and ECTS/credit mapping</label></div><div class="task"><input type="checkbox" data-id="uni4"><label>Compare total tuition + living cost + scholarship rules</label></div></div>
+   <div><div class="task"><input type="checkbox" data-id="uni5"><label>Check placement data, role mix and international outcomes</label></div><div class="task"><input type="checkbox" data-id="uni6"><label>Check internship/work rights and post-study visa route from official sources</label></div><div class="task"><input type="checkbox" data-id="uni7"><label>Check class profile and actual cohort averages where published</label></div><div class="task"><input type="checkbox" data-id="uni8"><label>Make final ROI / career-fit decision per programme</label></div></div>
+  </div>
+  <div class="callout warn">Do not call a programme a “safe” option based only on minimum requirements. Admission, employment, sponsorship and visa outcomes are not guaranteed.</div>
+ </div>
+</section>
+
+<section class="view" id="projects">
+ <div class="callout good"><b>November focus:</b> use the dedicated 22-day technical sprint tab to complete Project A for one hour daily. Project B (C++/Python pricing toolkit) is deliberately deferred until after early December deadlines.</div>
+ <div class="panel"><h2>Project A · Credit-Risk Model Validation Platform</h2><div class="cardhead"><span class="pill green">Main portfolio project · December</span><span class="pill blue">FDS / analytics / risk</span></div>
+ <p><b>Purpose:</b> show that you can build, validate, explain and monitor a credit-risk model—not just run a notebook or call a library.</p>
+ <h3>Build this sequence</h3>
+ <div class="tablewrap"><table><thead><tr><th>Layer</th><th>Required implementation</th><th>Why it stands out</th></tr></thead><tbody>
+ <tr><td>Data governance</td><td>Public/synthetic dataset, source/license, data dictionary, data lineage, missingness and leakage tests.</td><td>Reproducibility and responsible handling.</td></tr>
+ <tr><td>Baseline model</td><td>Logistic regression / scorecard; compare one gradient-boosting challenger only after baseline works.</td><td>Interpretable baseline and challenger model discipline.</td></tr>
+ <tr><td>Validation</td><td>Time-based/out-of-time split where possible; ROC-AUC, PR-AUC, KS, Brier score and calibration curve.</td><td>More than headline accuracy; credit-risk model performance and calibration.</td></tr>
+ <tr><td>Stability</td><td>Population Stability Index (PSI), feature drift, vintage/cohort analysis and monitoring thresholds.</td><td>Model monitoring and validation practice.</td></tr>
+ <tr><td>Explainability</td><td>SHAP/global-local explanations; reason codes; limitations and model card.</td><td>Transparent decision support.</td></tr>
+ <tr><td>Risk stress</td><td>Scenario sensitivity, threshold economics and simulated macro stress; clearly label as illustrative, not a bank regulatory model.</td><td>Connects model output to risk decisions.</td></tr>
+ <tr><td>Engineering</td><td>Python package, SQL storage, unit tests, GitHub Actions CI, Docker, Streamlit or FastAPI demo.</td><td>Production-minded, testable code.</td></tr>
+ </tbody></table></div>
+ <h3>GitHub repo structure</h3>
+ <pre class="codeprompt">credit-risk-validation-platform/
+  README.md
+  LICENSE
+  pyproject.toml
+  .gitignore
+  data/              # no sensitive data; scripts or synthetic generator
+  notebooks/         # exploration only
+  src/
+    data_validation/
+    features/
+    models/
+    validation/
+    monitoring/
+    explainability/
+  tests/
+  app/               # Streamlit or FastAPI
+  reports/
+    model_card.md
+    validation_report.md
+  .github/workflows/ci.yml</pre>
+ <div class="task"><input type="checkbox" data-id="pa1"><label>Write a one-page project charter and define a narrow use case</label></div>
+ <div class="task"><input type="checkbox" data-id="pa2"><label>Select an openly licensed or synthetic dataset and record its provenance</label></div>
+ <div class="task"><input type="checkbox" data-id="pa3"><label>Create repo, README, .gitignore, environment and first clean commit</label></div>
+ <div class="task"><input type="checkbox" data-id="pa4"><label>Build data checks and leakage-safe train/test split</label></div>
+ <div class="task"><input type="checkbox" data-id="pa5"><label>Build logistic regression baseline and evaluation notebook</label></div>
+ <div class="task"><input type="checkbox" data-id="pa6"><label>Add calibration, Brier, KS, PR-AUC and error analysis</label></div>
+ <div class="task"><input type="checkbox" data-id="pa7"><label>Add PSI/drift, SHAP and model card</label></div>
+ <div class="task"><input type="checkbox" data-id="pa8"><label>Add tests, CI, SQL persistence and dashboard/API</label></div>
+ <div class="task"><input type="checkbox" data-id="pa9"><label>Publish 2-page validation report, screenshots and 3-minute demo</label></div>
+ </div>
+ <div class="panel"><h2>Project B · C++ / Python Quant Pricing Toolkit</h2><div class="cardhead"><span class="pill amber">Start after December applications · January</span><span class="pill blue">QCF / quant finance</span></div>
+ <p><b>Purpose:</b> demonstrate numerical finance, C++ implementation, computational methods and independent validation.</p>
+ <div class="tablewrap"><table><thead><tr><th>Module</th><th>Implementation</th><th>Quality gate</th></tr></thead><tbody>
+ <tr><td>Analytical pricing</td><td>Black–Scholes European calls/puts; dividends and rate assumptions documented.</td><td>Compare to known values and put-call parity.</td></tr>
+ <tr><td>Tree model</td><td>Cox–Ross–Rubinstein binomial tree; American exercise extension.</td><td>Convergence toward Black–Scholes as steps increase.</td></tr>
+ <tr><td>Monte Carlo</td><td>Path simulation, antithetic variates and confidence intervals.</td><td>Convergence/error decreases as paths increase.</td></tr>
+ <tr><td>Greeks</td><td>Analytical and finite-difference delta, gamma, vega, theta, rho.</td><td>Cross-check both methods within tolerances.</td></tr>
+ <tr><td>Implied volatility</td><td>Robust root solver (bisection/Brent or safeguarded Newton).</td><td>Recover known volatility from synthetic prices.</td></tr>
+ <tr><td>Software engineering</td><td>C++20 library, Python bindings, tests, CI, docs and benchmark.</td><td>Reproducible build and clean API.</td></tr>
+ </tbody></table></div>
+ <div class="task"><input type="checkbox" data-id="pb1"><label>Set project scope and create C++ repository skeleton</label></div>
+ <div class="task"><input type="checkbox" data-id="pb2"><label>Implement Black–Scholes and analytic Greeks</label></div>
+ <div class="task"><input type="checkbox" data-id="pb3"><label>Implement CRR binomial model and convergence tests</label></div>
+ <div class="task"><input type="checkbox" data-id="pb4"><label>Implement Monte Carlo with variance reduction</label></div>
+ <div class="task"><input type="checkbox" data-id="pb5"><label>Add implied-vol solver, finite-difference Greeks and benchmarks</label></div>
+ <div class="task"><input type="checkbox" data-id="pb6"><label>Add Python wrapper, tests, docs and demo</label></div>
+ <div class="callout warn">Do not start both projects at full speed in November. Project A is the first build. Project B is deliberately sequenced after the early application deadlines.</div>
+ </div>
+ <div class="panel"><h2>One Claude session — 12 November (45 minutes)</h2><p class="hint">Use Claude once as an architecture reviewer and adversarial code reviewer. Do not blindly publish generated code; understand, test and own each component.</p>
+ <div class="codeprompt" id="claudePrompt">I am building an original Credit-Risk Model Validation Platform using only public or synthetic data. Review this project brief and propose a minimal, reproducible Python repository architecture. Prioritise data lineage, leakage checks, an interpretable logistic-regression baseline, calibration (Brier score and reliability curves), out-of-time validation, PSI/drift monitoring, SHAP explanations, unit tests, CI and a small Streamlit/FastAPI demo. Suggest a staged plan and numerical sanity checks. Do not invent results or use proprietary banking code/data. Ask me to make design decisions, critique my implementation and identify risks rather than generating an entire finished project.</div>
+ <button class="btn" id="copyClaude">Copy Claude prompt</button>
+ </div>
+</section>
+
+<section class="view" id="techsprint">
+ <div class="panel">
+  <h2>22-day technical standout sprint · 1 hour per day</h2>
+  <div class="callout good"><b>The goal:</b> one technically credible, public, reproducible project—not a stack of quick badges. Use ChatGPT as a pair-programmer and reviewer, but understand the design, run the code, verify the metrics and be able to defend every decision in an interview.</div>
+  <div class="grid">
+   <div class="kpi"><b>22 hours</b><span class="muted">9–30 November · 1 hour daily</span></div>
+   <div class="kpi"><b>1 repo</b><span class="muted">Credit-risk validation workbench</span></div>
+   <div class="kpi"><b>4 outputs</b><span class="muted">Code · dashboard · validation report · demo</span></div>
+   <div class="kpi"><b>₹0 tools</b><span class="muted">Open-source stack and public data</span></div>
+  </div>
+  <div class="callout warn"><b>Scope discipline:</b> complete Project A to a polished MVP by 30 November. Do not try to finish Project B (C++ quant pricing) at the same time. Start Project B after the December application deadlines. One excellent repository is more persuasive than two shallow ones.</div>
+ </div>
+
+ <div class="panel">
+  <h2>The technical idea: Credit Risk Model Validation & Decisioning Workbench</h2>
+  <p><b>What makes it stand out:</b> most beginner portfolios stop at “train a classifier and report accuracy.” Your project will show the full model-risk lifecycle: scorecard baseline, challenger model, probability calibration, decision-threshold economics, subgroup diagnostics, explainability, drift tests, software tests and a documented validation opinion.</p>
+  <p><b>Dataset:</b> UCI Default of Credit Card Clients — 30,000 rows and 23 features, CC BY 4.0. It is a historical Taiwan consumer-credit dataset from 2005. Cite it correctly and explicitly state that it is an educational benchmark, not current bank data or a proxy for banking-sector portfolios.</p>
+  <a href="https://archive.ics.uci.edu/dataset/350/default%2Bof%2Bcredit%2Bcard%2Bclients%2Bdataset" target="_blank">Official UCI dataset, licence and citation</a>
+  <h3 style="margin-top:14px">Technical components</h3>
+  <div class="tablewrap"><table><thead><tr><th>Component</th><th>What you implement</th><th>What you can defend</th></tr></thead><tbody>
+   <tr><td>Credit scorecard baseline</td><td>Logistic regression; optionally WoE/Information Value binning as a stretch.</td><td>Interpretability, coefficient direction, scorecard trade-offs.</td></tr>
+   <tr><td>Challenger model</td><td>Gradient boosting (e.g. HistGradientBoosting or XGBoost if setup is smooth).</td><td>Why compare a flexible model with an interpretable baseline?</td></tr>
+   <tr><td>Discrimination & uncertainty</td><td>ROC-AUC, PR-AUC, KS, confusion matrix and bootstrap confidence intervals.</td><td>Why accuracy is misleading for imbalanced default data.</td></tr>
+   <tr><td>Probability calibration</td><td>Reliability curve, Brier score, log loss; sigmoid vs isotonic calibration using validation-only or cross-validated predictions.</td><td>Ranking is not the same as accurate probability of default.</td></tr>
+   <tr><td>Decision economics</td><td>Threshold/cost matrix and expected-loss sensitivity under explicitly hypothetical cost assumptions.</td><td>Model score → decision; assumptions are not real bank loss estimates.</td></tr>
+   <tr><td>Fairness diagnostics</td><td>Compare subgroup sample sizes, approval/flag rates, TPR/FPR and calibration by age/sex groups.</td><td>Identify disparities; do not claim regulatory compliance or make causal claims.</td></tr>
+   <tr><td>Explainability</td><td>Global and local SHAP explanations for the tree model; inspect correlated features and explanation limits.</td><td>Explain a prediction without presenting association as causation.</td></tr>
+   <tr><td>Monitoring</td><td>Feature drift report using a clearly labelled synthetic shifted dataset; optionally Evidently.</td><td>Demonstrate a monitoring workflow, not claim true temporal drift.</td></tr>
+   <tr><td>Engineering</td><td>Reusable src modules, CLI or Streamlit dashboard, pytest, deterministic seeds and GitHub Actions CI.</td><td>Reproducibility, maintainability and testing—not only notebook code.</td></tr>
+  </tbody></table></div>
+  <div class="callout danger"><b>Methodological honesty:</b> this UCI dataset is a cross-sectional client-level table with historical monthly features, not a clean sequence of dated monthly snapshots per borrower. Do not call a random split “out-of-time validation.” Use a stratified holdout and, if you demonstrate drift, label the shift as simulated.</div>
+ </div>
+
+ <div class="panel">
+  <h2>Daily build plan · one hour each day</h2>
+  <p class="hint">Tick a task only after the code runs and the output is saved. If a day slips, continue the next day; protect GRE and application deadlines.</p>
+  <div class="tablewrap"><table><thead><tr><th>Date</th><th>60-minute task</th><th>Deliverable / quality gate</th></tr></thead><tbody>
+   <tr><td>9 Nov</td><td>Define project question, repo, environment and README skeleton.</td><td>Repo exists; scope and limits are written.</td></tr>
+   <tr><td>10 Nov</td><td>Fetch UCI dataset; write data dictionary and source/licence citation.</td><td>Reproducible data-loading script; no private data.</td></tr>
+   <tr><td>11 Nov</td><td>EDA: target balance, missingness, feature types, distributions and data-quality checks.</td><td>EDA notebook with 3–5 useful findings, not just charts.</td></tr>
+   <tr><td>12 Nov</td><td>Define leakage-safe preprocessing and stratified train/validation/test split.</td><td>Split logic and leakage checks documented; test set held back.</td></tr>
+   <tr><td>13 Nov</td><td>Build logistic-regression pipeline and baseline metrics.</td><td>Saved baseline metrics and confusion matrix.</td></tr>
+   <tr><td>14 Nov</td><td>Add credit scorecard thinking: coefficient signs, binning; WoE/IV only if time.</td><td>Interpretable baseline note; explain feature handling.</td></tr>
+   <tr><td>15 Nov</td><td>Train one gradient-boosting challenger.</td><td>Same split and comparable preprocessing; no test-set tuning.</td></tr>
+   <tr><td>16 Nov</td><td>Compare ROC-AUC, PR-AUC, KS and bootstrap confidence intervals.</td><td>Model comparison table with uncertainty.</td></tr>
+   <tr><td>17 Nov</td><td>Calibration: reliability curve, Brier/log loss, sigmoid vs isotonic.</td><td>Calibration plot; explain why fit data must be separate/cross-validated.</td></tr>
+   <tr><td>18 Nov</td><td>Build threshold and hypothetical cost-sensitivity analysis.</td><td>Decision table; clearly label assumptions and limitations.</td></tr>
+   <tr><td>19 Nov</td><td>Fairness/subgroup diagnostic by age and sex with sample counts.</td><td>Subgroup metrics and caveats; no legal-compliance claim.</td></tr>
+   <tr><td>20 Nov</td><td>SHAP global summary and two local explanations.</td><td>Saved plots and explanation caveat.</td></tr>
+   <tr><td>21 Nov</td><td>Simulate feature shift and generate a drift report.</td><td>Before/after drift report labelled synthetic.</td></tr>
+   <tr><td>22 Nov</td><td>Build a simple Streamlit dashboard for model comparison and validation.</td><td>App runs locally with sample predictions/plots.</td></tr>
+   <tr><td>23 Nov</td><td>Refactor notebook logic into src modules and config.</td><td>Clean project structure; one command to reproduce key outputs.</td></tr>
+   <tr><td>24 Nov</td><td>Add unit tests for preprocessing, metrics, calibration and threshold logic.</td><td>pytest passes; edge cases included.</td></tr>
+   <tr><td>25 Nov</td><td>Add GitHub Actions CI and pinned dependencies.</td><td>Tests run on push; reproducible environment.</td></tr>
+   <tr><td>26 Nov</td><td>Run full pipeline from a clean environment; fix failures.</td><td>Fresh-clone test passes; final metrics frozen.</td></tr>
+   <tr><td>27 Nov</td><td>Write model card and 3–5 page validation report.</td><td>Purpose, data, methodology, results, limitations, monitoring recommendations.</td></tr>
+   <tr><td>28 Nov</td><td>Polish README, architecture diagram, screenshots and references.</td><td>Recruiter/admissions reviewer can understand it in 2 minutes.</td></tr>
+   <tr><td>29 Nov</td><td>Record a 3-minute walkthrough; deploy dashboard only if easy.</td><td>Demo link or video; local reproducibility remains primary.</td></tr>
+   <tr><td>30 Nov</td><td>Final code review, remove secrets, verify licence/citations and write CV bullet.</td><td>Public repo tagged v1.0; honest project status.</td></tr>
+  </tbody></table></div>
+  <h3 style="margin-top:14px">Daily completion tracker</h3>
+  <div class="task"><input type="checkbox" data-id="ts01"><label>9 Nov — scope, repo, environment and README</label></div>
+  <div class="task"><input type="checkbox" data-id="ts02"><label>10 Nov — UCI data loader, data dictionary and licence</label></div>
+  <div class="task"><input type="checkbox" data-id="ts03"><label>11 Nov — EDA and data-quality checks</label></div>
+  <div class="task"><input type="checkbox" data-id="ts04"><label>12 Nov — leakage-safe split and preprocessing</label></div>
+  <div class="task"><input type="checkbox" data-id="ts05"><label>13 Nov — logistic-regression baseline</label></div>
+  <div class="task"><input type="checkbox" data-id="ts06"><label>14 Nov — scorecard interpretation / optional WoE</label></div>
+  <div class="task"><input type="checkbox" data-id="ts07"><label>15 Nov — gradient-boosting challenger</label></div>
+  <div class="task"><input type="checkbox" data-id="ts08"><label>16 Nov — ROC-AUC, PR-AUC, KS and bootstrap CIs</label></div>
+  <div class="task"><input type="checkbox" data-id="ts09"><label>17 Nov — probability calibration and reliability curve</label></div>
+  <div class="task"><input type="checkbox" data-id="ts10"><label>18 Nov — threshold and cost-sensitivity analysis</label></div>
+  <div class="task"><input type="checkbox" data-id="ts11"><label>19 Nov — subgroup/fairness diagnostics</label></div>
+  <div class="task"><input type="checkbox" data-id="ts12"><label>20 Nov — SHAP explanations</label></div>
+  <div class="task"><input type="checkbox" data-id="ts13"><label>21 Nov — synthetic drift monitoring</label></div>
+  <div class="task"><input type="checkbox" data-id="ts14"><label>22 Nov — Streamlit dashboard</label></div>
+  <div class="task"><input type="checkbox" data-id="ts15"><label>23 Nov — refactor into reusable modules</label></div>
+  <div class="task"><input type="checkbox" data-id="ts16"><label>24 Nov — pytest unit tests</label></div>
+  <div class="task"><input type="checkbox" data-id="ts17"><label>25 Nov — GitHub Actions CI</label></div>
+  <div class="task"><input type="checkbox" data-id="ts18"><label>26 Nov — clean environment end-to-end run</label></div>
+  <div class="task"><input type="checkbox" data-id="ts19"><label>27 Nov — model card and validation report</label></div>
+  <div class="task"><input type="checkbox" data-id="ts20"><label>28 Nov — README, architecture and screenshots</label></div>
+  <div class="task"><input type="checkbox" data-id="ts21"><label>29 Nov — demo walkthrough / optional deployment</label></div>
+  <div class="task"><input type="checkbox" data-id="ts22"><label>30 Nov — final QA, licence check and CV bullet</label></div>
+ </div>
+
+ <div class="panel">
+  <h2>How to use ChatGPT for each one-hour session</h2>
+  <ol>
+   <li><b>First 5 minutes:</b> ask ChatGPT to break today's task into the smallest implementation steps.</li>
+   <li><b>Next 35 minutes:</b> implement one module at a time. Ask for code with explanations and expected outputs.</li>
+   <li><b>Next 15 minutes:</b> run tests, inspect outputs and ask ChatGPT to review errors or challenge assumptions.</li>
+   <li><b>Final 5 minutes:</b> commit to GitHub and write a short note explaining what you learned.</li>
+  </ol>
+  <div class="codeprompt" id="techPrompt">Act as my senior credit-risk model validation reviewer and Python pair-programmer. I have exactly 60 minutes for today's milestone. First ask me what is already implemented, then give me the smallest next task. Explain each design decision. Do not invent metrics or results. Require me to run the code and show the output before moving on. Review for target leakage, train/test contamination, incorrect calibration, misleading fairness claims and reproducibility. Use only the public UCI Default of Credit Card Clients dataset. Clearly distinguish observed results from simulated drift or hypothetical cost assumptions. At the end, give me a concise commit message and 3 interview questions I should be able to answer.</div>
+  <button class="btn" id="copyTechPrompt">Copy daily ChatGPT prompt</button>
+ </div>
+
+ <div class="panel">
+  <h2>What to show admissions committees</h2>
+  <ul>
+   <li>Public GitHub repository with clean commits, reproducible setup and passing CI.</li>
+   <li>Interactive dashboard or recorded demo.</li>
+   <li>Short model-validation report with methodology, results, caveats and monitoring recommendation.</li>
+   <li>One honest CV bullet with repository link; only state metrics after they are measured on the held-out test set.</li>
+  </ul>
+  <p><b>Example CV line after completion:</b> “Built a reproducible credit-risk model validation workbench on a public benchmark, comparing an interpretable logistic scorecard with a tree-based challenger; evaluated discrimination, probability calibration, decision thresholds, subgroup performance and simulated feature drift; packaged the workflow with tests and CI.”</p>
+  <div class="callout warn">Do not use banking-sector customer data, internal models, proprietary code, confidential processes or employer documents. The project should be independently built on public data. Do not claim production deployment, regulatory approval, real bank impact or a real-world temporal backtest.</div>
+ </div>
+</section>
+
+<section class="view" id="courses">
+ <div class="panel"><h2>Course strategy — prerequisite before certificates</h2><div class="callout danger"><b>Most important academic gap:</b> standalone, graded calculus-based probability/statistics on an official university transcript. A Coursera, NPTEL or GARP certificate is not a substitute for transcripted prerequisite credit unless the university explicitly confirms it.</div>
+ <div class="carditem"><div class="cardhead"><b>1. Roger Williams University · DMAT 311 Computational Probability Theory</b><span class="pill green">Best fit for calculus-based probability</span></div>
+ <p><b>3 semester credits</b>; online/asynchronous; syllabus includes distributions, conditional/joint probability, Monte Carlo, CLT, correlation/regression and confidence intervals. Published workload is 126 hours. The course page lists $1,299 tuition; extra fees/software/e-text may apply, so confirm the full current amount before paying.</p>
+ <p><b>Use:</b> strongest first course to ask about for QCF/quant finance and programmes requesting calculus-based probability. It may not satisfy separate statistics and probability requirements at every school.</p>
+ <a href="https://www.distancecalculus.com/data-science-honors/" target="_blank">Course page</a> · <a href="https://www.distancecalculus.com/syllabi/DistanceCalculus-RWU-DMAT311-CompProbabilityTheory-Syllabus-2023.pdf" target="_blank">Official syllabus</a> · <a href="https://www.distancecalculus.com/enrollform/" target="_blank">Enrollment/price listing</a>
+ </div>
+ <div class="carditem"><div class="cardhead"><b>2. Arizona State University · STP 226 Elements of Statistics</b><span class="pill amber">Basic stats, not calculus-based</span></div>
+ <p><b>3 credits</b>; on-demand or 8 weeks; published price $25 + $400 to add credits. The course appears on an ASU transcript, but it is introductory descriptive/inferential statistics and is not a calculus-based probability course.</p>
+ <p><b>Use:</b> only if a programme confirms that introductory statistics credit fills its requirement or as a separate basic statistics course. The next catalogue session shown is 12 January 2027, so it will not solve early December deadlines unless the school accepts in-progress coursework.</p>
+ <a href="https://courses.ulc.asu.edu/elements-of-statistics-stp-226/" target="_blank">Course details</a> · <a href="https://www.courses.ulc.asu.edu/" target="_blank">ASU course catalogue</a>
+ </div>
+ <div class="carditem"><div class="cardhead"><b>3. University of Michigan · Statistics with Python</b><span class="pill blue">Supplement · non-credit</span></div>
+ <p>Three-course series, about 57 hours; covers inference, regression, Bayesian methods and statistical modelling in Python. Shareable certificate; not university transcript credit.</p>
+ <p><b>Use:</b> choose if your FDS/analytics path needs demonstrable applied statistics. Do not repeat beginner Python material already covered by your DataCamp R Data Scientist track.</p>
+ <a href="https://online.umich.edu/series/statistics-with-python/" target="_blank">Michigan Online details</a>
+ </div>
+ <div class="carditem"><div class="cardhead"><b>4. Columbia · Introduction to Financial Engineering & Risk Management</b><span class="pill blue">Quant-finance supplement</span></div>
+ <p>Six-week self-paced course; 2–5 hours/week; free learning access with optional $20 certificate on the Columbia Plus page. Topics include stochastic models, derivatives, swaps, options and binomial pricing. It is non-credit and assumes intermediate/advanced probability, statistics, linear algebra and calculus.</p>
+ <p><b>Use:</b> after probability study begins; supports Project B and quant-finance SOP. Do not treat its certificate as a maths prerequisite.</p>
+ <a href="https://plus.columbia.edu/content/introduction-financial-engineering-and-risk-management" target="_blank">Columbia course</a> · <a href="https://cvn.columbia.edu/content/financial-engineering-and-risk-management-specialization" target="_blank">Full five-course specialization</a>
+ </div>
+ <div class="carditem"><div class="cardhead"><b>5. MITx · Probability: The Science of Uncertainty and Data</b><span class="pill">Rigorous learning · no credit assumed</span></div>
+ <p>Use as a free/low-cost mathematical probability learning resource alongside the transcripted course. Do not represent it as a three-credit transcript course.</p>
+ <a href="https://openlearning.mit.edu/courses-programs/mitx-courses/probability-science-uncertainty-and-data" target="_blank">MITx course page</a>
+ </div>
+ <h3>Course decision checklist</h3>
+ <div class="task"><input type="checkbox" data-id="cr1"><label>Send DMAT 311 syllabus to Georgia Tech, Manchester, Edinburgh and UCD QF; ask if 3 credits and in-progress status count.</label></div>
+ <div class="task"><input type="checkbox" data-id="cr2"><label>Ask BSE, Rotman, UCD FDS, Purdue and UT whether they need separate statistics/inference credit.</label></div>
+ <div class="task"><input type="checkbox" data-id="cr3"><label>Ask whether the course must be completed before application, before offer or before enrolment.</label></div>
+ <div class="task"><input type="checkbox" data-id="cr4"><label>Compare full cost, grade, official transcript, course duration and assessment before paying.</label></div>
+ <div class="task"><input type="checkbox" data-id="cr5"><label>Enrol only after written guidance or a documented decision on acceptance risk.</label></div>
+ </div>
+ <div class="panel"><h2>What to study for each programme track</h2>
+ <div class="tablewrap"><table><thead><tr><th>Track / programmes</th><th>Highest-value subjects</th><th>Evidence</th></tr></thead><tbody>
+ <tr><td>Quant finance: GT QCF, Manchester QF, UCD QF, Edinburgh FMO/CMF, Bocconi MAFINRISK, EDHEC FE</td><td>Calculus-based probability, mathematical statistics, linear algebra, numerical methods, optimization, derivatives and C++/Python.</td><td>DMAT 311 transcript + Project B + GRE Quant.</td></tr>
+ <tr><td>Financial data science: UCD FDS, BSE, ESSEC DSBA, Exeter Finance & Data Science</td><td>Inference, regression, ML, time series, causal reasoning, SQL/data engineering, model evaluation.</td><td>Statistics course + Project A + Michigan Statistics with Python (optional).</td></tr>
+ <tr><td>Business analytics/AI: Trinity, Warwick BA&AI, Purdue MSBAIM, UT Austin MSBTAI</td><td>Applied statistics, experimentation, ML, databases, software engineering, deployment and communication.</td><td>Project A with API/dashboard, SQL, tests and a business case.</td></tr>
+ <tr><td>Financial risk: Rotman MFRM, Manchester QF, Bocconi MAFINRISK</td><td>Credit/market risk, calibration, stress testing, risk governance, portfolio and derivatives foundations.</td><td>banking-sector experience described safely + Project A validation report + Columbia/GARP study.</td></tr>
+ </tbody></table></div>
+ </div>
+</section>
+
+<section class="view" id="certs">
+ <div class="panel">
+  <h2>Optional quick credentials — secondary to the technical project</h2>
+  <div class="callout good"><b>Updated priority:</b> your main differentiator is now the 22-day technical build in the Technical sprint tab. Quick credentials are optional and should not displace that build, GRE, SOPs, LORs or applications.</div>
+  <div class="callout warn"><b>Do not collect everything.</b> My recommended application sprint is: (1) one HackerRank SQL assessment, (2) two relevant Kaggle micro-courses, (3) one Forage simulation, and (4) one public Kaggle fraud notebook. Add one open-source contribution if time allows.</div>
+ </div>
+
+ <div class="panel">
+  <h2>1. Technical credentials you can finish quickly</h2>
+  <div class="carditem">
+   <div class="cardhead"><b>HackerRank — SQL Intermediate Skills Certification</b><span class="pill green">35 minutes · Free</span></div>
+   <p><b>Why it is useful:</b> it is a timed skills assessment, not just a video-course completion badge. Covers complex joins and related intermediate SQL skills. This is the best quick technical assessment to attempt if you can already solve SQL joins, subqueries, grouping and window-function-style problems.</p>
+   <p><b>Plan:</b> practise for 2–3 hours first; take the 35-minute assessment only when ready. Don't take SQL Basic if your ability is already intermediate. HackerRank says its certification tests are free; check the current attempt/retake rules before starting.</p>
+   <a href="https://www.hackerrank.com/skills-verification/sql_intermediate" target="_blank">SQL Intermediate assessment</a> · <a href="https://www.hackerrank.com/skills-directory/sql_intermediate" target="_blank">Skills assessed</a>
+  </div>
+  <div class="carditem">
+   <div class="cardhead"><b>Kaggle Learn — Intermediate Machine Learning</b><span class="pill green">4 hours · Free certificate</span></div>
+   <p>Missing values, categorical variables, pipelines, cross-validation, XGBoost and data leakage. Particularly relevant to your credit-risk model validation project.</p>
+   <a href="https://www.kaggle.com/learn/intermediate-machine-learning" target="_blank">Start course</a>
+  </div>
+  <div class="carditem">
+   <div class="cardhead"><b>Kaggle Learn — Data Cleaning</b><span class="pill green">4 hours · Free certificate</span></div>
+   <p>Missing values, scaling, dates, encoding and inconsistent data. Pair it with Project A's data-quality and leakage checks.</p>
+   <a href="https://www.kaggle.com/learn/data-cleaning" target="_blank">Start course</a>
+  </div>
+  <div class="carditem">
+   <div class="cardhead"><b>Kaggle Learn — Feature Engineering</b><span class="pill green">5 hours · Free certificate</span></div>
+   <p>Mutual information, feature creation, clustering, PCA and target encoding. More relevant than another beginner Python certificate.</p>
+   <a href="https://www.kaggle.com/learn/feature-engineering" target="_blank">Start course</a>
+  </div>
+  <div class="carditem">
+   <div class="cardhead"><b>Kaggle Learn — Time Series</b><span class="pill green">5 hours · Free certificate</span></div>
+   <p>Trend, seasonality, lag features and forecasting. Particularly useful for financial data science and risk monitoring narratives.</p>
+   <a href="https://www.kaggle.com/learn/time-series" target="_blank">Start course</a>
+  </div>
+  <div class="callout warn"><b>Choose only two Kaggle courses before the earliest deadlines:</b> Intermediate ML + Data Cleaning. Add Feature Engineering or Time Series only if the applications are on schedule. Kaggle confirms its Learn courses award completion certificates; these are lightweight course certificates, not proctored professional certifications.</div>
+  <a href="https://www.kaggle.com/learn-course-certificates" target="_blank">How Kaggle certificates work</a>
+ </div>
+
+ <div class="panel">
+  <h2>2. Employer-backed extracurriculars — Forage</h2>
+  <p>Forage simulations are free, self-paced, employer-designed work samples. They provide completion certificates and can be listed as extracurricular activities. They are <b>not internships, employment or formal professional certifications</b>. Complete one carefully and be ready to discuss the tasks.</p>
+  <div class="carditem">
+   <div class="cardhead"><b>Citi — Markets Sales & Trading</b><span class="pill green">6–7 hours · Free</span></div>
+   <p><b>Best fit for your finance direction.</b> Analyse market news, review an FOMC meeting, form a market view and pitch a trade while considering risk. This gives you a concrete finance extracurricular beyond coursework.</p>
+   <a href="https://www.theforage.com/simulations/Citi/markets-sales-trading-0vhv" target="_blank">Start Citi simulation</a>
+  </div>
+  <div class="carditem">
+   <div class="cardhead"><b>Bank of America — Investment Banking</b><span class="pill green">4–5 hours · Free</span></div>
+   <p>Financial analysis, DCF, company analysis, M&A screening and communication. Choose this instead of Citi if you want a corporate-finance / valuation angle. Do not complete both just to collect two certificates.</p>
+   <a href="https://www.theforage.com/simulations/bank-of-america/investment-banking-bwp7" target="_blank">Start Bank of America simulation</a>
+  </div>
+  <div class="callout">My pick: Citi Markets Sales & Trading for quant-finance / financial-risk applications. Bank of America is the alternative if your story leans toward corporate finance. Forage itself says simulations are free and self-paced; its employer simulations are generally completed in a number of hours.</div>
+  <a href="https://www.theforage.com/simulations?careers=banking-and-financial-services" target="_blank">Browse banking simulations</a> · <a href="https://www.theforage.com/simulations?careers=data" target="_blank">Browse data simulations</a>
+ </div>
+
+ <div class="panel">
+  <h2>3. The strongest quick extracurricular for your profile: Kaggle Credit Card Fraud competition</h2>
+  <div class="cardhead"><b>Predicting Credit Card Fraud — Kaggle Playground Series S6E11</b><span class="pill amber">Deadline: 30 Nov 2026</span></div>
+  <p>This is unusually well aligned with your banking-sector credit-risk/model-validation experience. The task predicts fraud probabilities and is evaluated using ROC-AUC. Kaggle describes the Playground dataset as synthetically generated, so do not describe it as real bank/customer data or a real production fraud model.</p>
+  <p><b>Deliver before 30 November:</b></p>
+  <ul>
+   <li>One public, reproducible notebook with a clear problem statement and dataset citation.</li>
+   <li>Leakage-aware validation and a simple baseline.</li>
+   <li>Compare logistic regression with one tree-based challenger.</li>
+   <li>Explain ROC-AUC, class imbalance, calibration and threshold trade-offs.</li>
+   <li>Publish a short README explaining what you learned and what you would improve.</li>
+  </ul>
+  <p><b>What to put in the application:</b> only the actual competition participation, notebook link, methods and verified leaderboard result. Participation is not an award; never imply a high rank unless achieved.</p>
+  <a href="https://www.kaggle.com/competitions/playground-series-s6e11/overview" target="_blank">Official competition and rules</a>
+  <div class="task"><input type="checkbox" data-id="fastk1"><label>Register and read competition rules / data description</label></div>
+  <div class="task"><input type="checkbox" data-id="fastk2"><label>Publish a leakage-aware baseline notebook</label></div>
+  <div class="task"><input type="checkbox" data-id="fastk3"><label>Run at least one meaningful model comparison and submit prediction</label></div>
+  <div class="task"><input type="checkbox" data-id="fastk4"><label>Write a short model-evaluation note and link it from GitHub</label></div>
+ </div>
+
+ <div class="panel">
+  <h2>4. Open-source extracurricular — Winter of Code Social</h2>
+  <div class="cardhead"><b>WOCS — open-source contribution programme</b><span class="pill green">Free · Active now</span></div>
+  <p>Winter of Code Social is a community-run open-source programme. Its published 2026–27 coding period is 1 Nov 2026–31 Jan 2027; one merged pull request qualifies for a participant certificate, with certificates distributed on 10 Feb 2027. This certificate will arrive after most of your January application deadlines, but a genuinely merged PR and public contribution link can already support an application as an ongoing extracurricular.</p>
+  <p><b>Make it relevant:</b> look for a Python, data, analytics, documentation, testing or ML issue. Prefer one meaningful bug fix, test, data-quality improvement or documentation improvement over several trivial typo PRs. Check the project's maintainers, activity and contribution rules before investing time.</p>
+  <p><b>Application wording before certificate:</b> “Open-source contributor — [project], [merged PR link]” only after the PR is actually merged. If it is still under review, say “contribution submitted / in progress,” not completed.</p>
+  <a href="https://woc.codesocial.tech/" target="_blank">WOCS programme</a> · <a href="https://woc.codesocial.tech/timeline" target="_blank">Timeline</a> · <a href="https://woc.codesocial.tech/guidelines" target="_blank">Contribution rules</a>
+  <div class="task"><input type="checkbox" data-id="fastw1"><label>Review project list and select an active Python/data project</label></div>
+  <div class="task"><input type="checkbox" data-id="fastw2"><label>Introduce yourself to maintainer and claim a suitable issue</label></div>
+  <div class="task"><input type="checkbox" data-id="fastw3"><label>Submit a useful, tested pull request</label></div>
+  <div class="task"><input type="checkbox" data-id="fastw4"><label>Get PR merged and save the public link for applications</label></div>
+ </div>
+
+ <div class="panel">
+  <h2>5. Optional technical stretch credential — AWS microcredentials</h2>
+  <div class="carditem">
+   <div class="cardhead"><b>AWS Data Visualization Demonstrated</b><span class="pill amber">Free · hands-on timed lab</span></div>
+   <p>AWS launched free, hands-on data analytics microcredentials in 2026. Data Visualization Demonstrated validates practical dashboard/reporting work in a live AWS environment, including services such as Athena, Redshift Serverless, Glue and QuickSight. Passing earns a shareable Credly badge.</p>
+   <p><b>Why it is niche:</b> unlike a video course certificate, it is a timed lab assessment. However, it is only a good quick win if you already have some AWS/data-visualisation familiarity. AWS says the assessment is hands-on and provides no hints; its microcredential platform says a failed attempt may require a 25-day wait before retaking.</p>
+   <p><b>Recommendation:</b> optional, not a November priority. Review the preview experience and attempt only if you can comfortably work with the AWS services. Do not risk your application schedule for it.</p>
+   <a href="https://aws.amazon.com/blogs/training-and-certification/prove-your-data-analytics-skills-three-new-microcredentials-now-available/" target="_blank">AWS announcement</a> · <a href="https://skillbuilder.aws/category/type/microcredentials" target="_blank">AWS Skill Builder microcredentials</a>
+  </div>
+ </div>
+
+ <div class="panel">
+  <h2>6. Your exact fast-win sprint</h2>
+  <div class="tablewrap"><table><thead><tr><th>When</th><th>Action</th><th>Time / cost</th><th>Why this order</th></tr></thead><tbody>
+   <tr><td>9–12 Nov</td><td>HackerRank SQL Intermediate practice + assessment if ready</td><td>2–3h prep + 35m test · free</td><td>Quick verified skill assessment.</td></tr>
+   <tr><td>10–15 Nov</td><td>Kaggle Intermediate ML + Data Cleaning</td><td>8h total · free</td><td>Directly supports Project A; two shareable completion certificates.</td></tr>
+   <tr><td>16–22 Nov</td><td>Complete Citi Markets Sales & Trading OR Bank of America IB simulation</td><td>4–7h · free</td><td>Employer-designed finance extracurricular.</td></tr>
+   <tr><td>By 30 Nov</td><td>Publish Kaggle Credit Card Fraud notebook and submission</td><td>6–10h · free</td><td>Most distinctive and relevant evidence for your risk/data-science story.</td></tr>
+   <tr><td>By 15 Jan</td><td>One WOCS open-source PR merged if feasible</td><td>Variable · free</td><td>Public evidence of collaboration and contribution; certificate arrives 10 Feb.</td></tr>
+   <tr><td>Only if spare time</td><td>AWS Data Visualization Demonstrated</td><td>Prep varies · free</td><td>More technical, but requires existing AWS familiarity.</td></tr>
+  </tbody></table></div>
+  <div class="callout danger"><b>Time protection:</b> if GRE, SOPs, LORs or an application deadline slips, drop AWS first, then the second Kaggle course, then the Forage simulation. Do not sacrifice the transcripted probability/statistics course or applications to collect quick badges.</div>
+  <h3>Fast-win checklist</h3>
+  <div class="task"><input type="checkbox" data-id="fast1"><label>HackerRank SQL Intermediate passed and certificate saved</label></div>
+  <div class="task"><input type="checkbox" data-id="fast2"><label>Kaggle Intermediate ML certificate saved</label></div>
+  <div class="task"><input type="checkbox" data-id="fast3"><label>Kaggle Data Cleaning certificate saved</label></div>
+  <div class="task"><input type="checkbox" data-id="fast4"><label>One Forage finance simulation completed and certificate saved</label></div>
+  <div class="task"><input type="checkbox" data-id="fast5"><label>Kaggle fraud notebook published and linked on CV / GitHub</label></div>
+  <div class="task"><input type="checkbox" data-id="fast6"><label>WOCS project selected and contribution submitted</label></div>
+  <div class="task"><input type="checkbox" data-id="fast7"><label>All credentials listed honestly with completion dates and links</label></div>
+ </div>
+
+ <div class="panel">
+  <h2>7. What I would skip for this deadline cycle</h2>
+  <ul>
+   <li><b>GARP RAI / FRM:</b> too much time or cost for a quick application add-on; consider after applications.</li>
+   <li><b>Paid Microsoft/AWS professional certification exams:</b> do not pay for broad certifications just to add a logo. The AWS microcredentials above are free; full certifications are a different product.</li>
+   <li><b>Generic AI prompt-engineering certificates:</b> weak differentiation for your quantitative programmes.</li>
+   <li><b>Repeated beginner Python/SQL courses:</b> your profile already includes programming exposure. Show an intermediate assessment or working project instead.</li>
+   <li><b>Multiple Forage certificates:</b> one relevant simulation with a thoughtful reflection is enough.</li>
+   <li><b>Unpaid “internships” that charge a fee:</b> avoid paying for a certificate or title. Verify the organisation, mentor, deliverable and public evidence first.</li>
+  </ul>
+ </div>
+</section>
+
+<section class="view" id="tests">
+ <div class="layout equal">
+  <div class="panel"><h2>GRE General Test</h2><div class="kpi"><b>26 November 2026</b><span class="muted">Current target date · not booked</span></div>
+   <p><b>Baseline:</b> 316 total, Q162/V154. <b>Target:</b> Q169–170; maintain credible Verbal/AWA performance.</p>
+   <div class="callout warn">A 26 Nov test is tight for the 5 Dec QCF deadline because ETS says official scores take 8–10 days. Check with admissions whether an unofficial/self-reported score can be used while the official report follows. If considering an earlier date, only do so if timed mocks show readiness and a seat exists.</div>
+   <h3>Study plan to test day</h3>
+   <ul><li>11 Nov: GRE Quant diagnostic using your existing notes; record topic-level accuracy and build an error log.</li><li>12–15 Nov: targeted Quant revision based on diagnostic errors; probability/statistics, word problems and one timed section.</li><li>16–22 Nov: two full timed mocks, targeted drills, verbal maintenance and AWA practice.</li><li>23–25 Nov: review error log, formulas and pacing; no broad new topics.</li><li>26 Nov: test only if booking is confirmed and readiness threshold is met.</li></ul>
+   <div class="task"><input type="checkbox" data-id="gre1"><label>Take timed diagnostic and record Q/V/AWA baseline</label></div>
+   <div class="task"><input type="checkbox" data-id="gre2"><label>Build error log: concept / trap / time / correction / redo date</label></div>
+   <div class="task"><input type="checkbox" data-id="gre3"><label>Complete two full timed mocks before deciding to sit</label></div>
+   <div class="task"><input type="checkbox" data-id="gre4"><label>Check 21-day retake rule, test-centre seat and booking confirmation</label></div>
+   <div class="task"><input type="checkbox" data-id="gre5"><label>Confirm score-report policy with GT and Manchester</label></div>
+   <a href="https://www.ets.org/gre/test-takers/schedule.html" target="_blank">ETS scheduling</a> · <a href="https://www.ets.org/gre/test-takers/general-test/scores.html" target="_blank">Official score timing</a>
+  </div>
+  <div class="panel"><h2>IELTS Academic — MOI first, December only if required</h2><div class="kpi"><b>1–5 December 2026</b><span class="muted">Target sitting window · not booked</span></div>
+   <p><b>Booking plan:</b> Book an IELTS Academic sitting in the first week of December, before 15 December. This is needed for Purdue and Manchester; UT MSBTAI remains pending. Do not book on the assumption that all programmes need it.</p>
+   <p><b>Target:</b> overall 7.5 with no component below 7.0 as a personal safety target; each programme's actual minimum controls.</p>
+   <p>IELTS on computer results are usually available in 1–5 days. Leave extra time for the university to receive/verify the score.</p>
+   <div class="callout good">Three exemptions are confirmed for Toronto MScAC, BSE Data Science and UT Austin MSBAi. Purdue and Manchester require an accepted English test; Georgia Tech, UCD, Edinburgh and UT MSBTAI are not confirmed waived.</div>
+   <h3>Preparation if test becomes necessary</h3>
+   <ul><li>One diagnostic with Listening/Reading timing.</li><li>Two Task 2 essays/week and one Task 1.</li><li>Three speaking recordings/week.</li><li>Review errors using IELTS band descriptors.</li></ul>
+   <div class="task"><input type="checkbox" data-id="ielts1"><label>Record MOI reply for every university</label></div>
+   <div class="task"><input type="checkbox" data-id="ielts2"><label>Confirm latest permitted IELTS evidence date for each application</label></div>
+   <div class="task"><input type="checkbox" data-id="ielts3"><label>Check available computer-based IELTS Academic slots for 1–5 Dec</label></div>
+   <div class="task"><input type="checkbox" data-id="ielts4"><label>Book IELTS Academic for 1–5 Dec if a suitable seat is available</label></div>
+   <a href="https://ielts.org/take-a-test/your-results/getting-and-sharing-your-results" target="_blank">Official IELTS results timing</a>
+  </div>
+ </div>
+</section>
+
+<section class="view" id="review">
+ <div class="layout equal">
+  <div class="panel"><h2>Evidence inventory — what to assemble</h2>
+   <div class="task"><input type="checkbox" data-id="ev1"><label>Official transcripts / semester mark sheets and degree certificate</label></div>
+   <div class="task"><input type="checkbox" data-id="ev2"><label>Official grading scale / CGPA explanation</label></div>
+   <div class="task"><input type="checkbox" data-id="ev3"><label>Detailed course descriptions, credits and grades for calculus, linear algebra, probability/statistics, programming and IT minor</label></div>
+   <div class="task"><input type="checkbox" data-id="ev4"><label>CV with accurate banking-sector employment dates and verified impact</label></div>
+   <div class="task"><input type="checkbox" data-id="ev5"><label>Project one-pagers and GitHub links once work is genuinely complete</label></div>
+   <div class="task"><input type="checkbox" data-id="ev6"><label>GRE report and IELTS/MOI status log</label></div>
+   <div class="task"><input type="checkbox" data-id="ev7"><label>Scholarship, tuition, living-cost and visa research per country</label></div>
+  </div>
+  <div class="panel"><h2>Notes and university replies</h2><p class="hint">Notes save in this browser only. Do not paste confidential employer data.</p>
+   <textarea id="notes" placeholder="Record MOI replies, professor return dates, course approvals, exact test booking, application status, and questions to resolve…"></textarea>
+   <div class="links" style="margin-top:10px"><button class="btn" id="export">Export progress JSON</button> <label class="import-control" for="progressImport">Import saved progress JSON <input id="progressImport" type="file" accept="application/json,.json"></label><button class="btn secondary" id="print">Print tracker</button></div>
+   <p class="hint" id="saveStatus">Autosaved locally.</p>
+  </div>
+ </div>
+ <div class="panel"><h2>Research sources used</h2>
+  <ul>
+   <li><a href="https://archive.ics.uci.edu/dataset/350/default%2Bof%2Bcredit%2Bcard%2Bclients%2Bdataset" target="_blank">UCI Default of Credit Card Clients dataset</a>; <a href="https://scikit-learn.org/stable/modules/calibration.html" target="_blank">scikit-learn probability calibration</a>; <a href="https://shap.readthedocs.io/en/stable/generated/shap.TreeExplainer.html" target="_blank">SHAP TreeExplainer</a>; <a href="https://github.com/evidentlyai/evidently" target="_blank">Evidently monitoring framework</a>.</li>
+   <li><a href="https://www.garp.org/rai" target="_blank">GARP RAI programme</a>, <a href="https://www.garp.org/rai/exam-logistics" target="_blank">exam windows</a> and <a href="https://www.garp.org/rai/fees-payments" target="_blank">fees</a>.</li>
+   <li><a href="https://www.garp.org/frm/program-exams" target="_blank">GARP FRM exam and work-experience requirements</a>; <a href="https://www.garp.org/courses/financial-risk-and-regulation" target="_blank">FRR series</a>.</li>
+   <li><a href="https://www.distancecalculus.com/data-science-honors/" target="_blank">RWU DMAT 311</a>; <a href="https://courses.ulc.asu.edu/elements-of-statistics-stp-226/" target="_blank">ASU STP 226</a>.</li>
+   <li><a href="https://online.umich.edu/series/statistics-with-python/" target="_blank">Michigan Statistics with Python</a>; <a href="https://cvn.columbia.edu/content/financial-engineering-and-risk-management-specialization" target="_blank">Columbia Financial Engineering and Risk Management</a>.</li>
+   <li><a href="https://www.ets.org/gre/test-takers/general-test/scores.html" target="_blank">ETS GRE score timing</a>; <a href="https://ielts.org/take-a-test/your-results/getting-and-sharing-your-results" target="_blank">IELTS result timing</a>.</li>
+  </ul>
+ </div>
+</section>
+
+<p class="foot">Tracker version: 9 November 2026. It is a planning tool, not a live university portal or calendar sync. Checked boxes and notes are stored in this browser. Dates, course prices, fees and requirements can change; verify official pages before paying or submitting. The project roadmaps are recommendations based on your existing application playbook; no actual repository/codebase was available for a code review.</p>
+</main>
+<script>
+const oldKey="fall2027_admissions_master_tracker_2026_11_09";
+const key="fall2027_admissions_master_tracker_2026_11_10";
+let previous={};try{previous=JSON.parse(localStorage.getItem(oldKey)||"{}")}catch(e){}
+let state={};try{state=JSON.parse(localStorage.getItem(key)||"{}")}catch(e){}
+state.done=state.done||{};state.notes=state.notes||previous.notes||"";
+const dayPlan=[
+["Mon 9 Nov","Admin foundation","Completed · archive sent evidence",[
+["NITK digital transcript application email","Sent; official transcript still pending",true],
+["Initial MOI waiver enquiries to universities","Sent; decisions logged individually",true],
+["Create master deadline and requirement matrix","Completed",true],
+["Set up application folders and document checklist","Completed; Drive workspace created",true]]],
+["Tue 10 Nov","Admissions updates + profile work","Free day · admissions actions completed; finish one profile task",[
+["Send NITK grade cards to Manchester for preliminary review","Sent with IMG_9155.pdf; official transcript to follow",true],
+["Submit UCD portal enquiry for B746 and B158","Received confirmation · enquiry submitted",true],
+["Ask UT MSBTAI separately about India/MOI English exemption","Sent in October email thread; awaiting reply",true],
+["Update English exemption evidence tracker","Three programme-specific exemptions documented",true],
+["Spend one focused hour on Credit-Risk Validation Workbench","Create repo skeleton, scope and dataset plan"],
+["Draft the master SOP narrative outline","EEE + IT minor → banking-sector credit risk/model validation → target role"],
+["Shortlist IELTS Academic test seats for 1–5 Dec","Not booked; user plans to book before 15 Dec"]]],
+["Wed 11 Nov","GRE Quant diagnostic","Free day · use your notes from the other page",[
+["Take a timed GRE Quant diagnostic","Record score, timing and topic-level accuracy"],
+["Create the Quant error log","Concept gap / careless error / time pressure / correction"],
+["Identify the three highest-impact weak topics","Set the next three revision blocks"],
+["Check 26 Nov GRE seat and official score timing","Target remains provisional; not booked"]]],
+["Thu 12 Nov","SOP + statistics-course decision","Free day · 3–4 focused hours",[
+["Build the Quant Finance SOP outline","Use truthful banking-sector/model-validation examples"],
+["Shortlist two graded university-level probability/statistics courses","Do not pay before acceptance is checked"],
+["Check Prof. Sowmya and second professor leave/return status","Request LOR only after they are available"],
+["Continue Credit-Risk Validation Workbench for one hour","Data dictionary and reproducible data-loading plan"]]],
+["Fri 13 Nov","Workday · light admin","45–60 min maximum",[
+["Check for Manchester, UT MSBTAI, Georgia Tech and UCD replies","Update status only if a new written response arrives"],
+["Review 10 GRE error-log questions","Short maintenance block"],
+["Check NITK transcript request status once","Do not send repeated chasers prematurely"]]],
+["Sat 14 Nov","Workday · light maintenance","45–60 min maximum",[
+["IELTS format practice or one short speaking recording","Keep it light; target test sitting 1–5 Dec"],
+["Review SOP evidence and CV accuracy","No unverified claims or invented project outcomes"]]],
+["Sun 15 Nov","Deep-work checkpoint","Free day · 4–5 focused hours",[
+["Complete a GRE timed section or mock review","Use Wednesday diagnostic to set the scope"],
+["Revise both core SOP outlines","Quant finance and financial data science"],
+["Build Credit-Risk Validation Workbench v0.1","README, public dataset, data dictionary and EDA plan"],
+["Prepare Manchester official transcript follow-through","Send official transcript as soon as NITK issues it"],
+["Review all application priorities for 16–22 Nov","Protect early deadlines and LOR lead time"]]]
+];
+const daily=document.getElementById("daily");let dailyIds=[];
+dayPlan.forEach((d,i)=>{let box=document.createElement("div");box.className="day";box.innerHTML=`<div class="dayhead"><span>${d[0]} · ${d[1]}</span><span class="pill">${d[2]}</span></div><div class="daybody"></div>`;d[3].forEach((t,j)=>{let id=`day${i}_${j}`;dailyIds.push(id);if(t[2]===true)state.done[id]=true;let row=document.createElement("div");row.className="task";row.innerHTML=`<input type="checkbox" data-id="${id}"><label><b>${t[0]}</b><small>${t[1]}</small></label>`;box.querySelector(".daybody").appendChild(row)});daily.appendChild(box)});
+document.querySelectorAll(".tabs button").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll(".tabs button").forEach(x=>x.classList.toggle("active",x===b));document.querySelectorAll(".view").forEach(v=>v.classList.toggle("active",v.id===b.dataset.tab))}));
+function bindChecks(){document.querySelectorAll('input[type="checkbox"][data-id]').forEach(el=>{let id=el.dataset.id;el.checked=!!state.done[id];el.closest(".task")?.classList.toggle("done",el.checked);el.onchange=()=>{state.done[id]=el.checked;el.closest(".task")?.classList.toggle("done",el.checked);save();update()}})}
+function save(){try{localStorage.setItem(key,JSON.stringify(state))}catch(e){}}
+function update(){let checks=[...document.querySelectorAll('input[type="checkbox"][data-id]')];let n=checks.length,d=checks.filter(x=>state.done[x.dataset.id]).length;document.getElementById("pct").textContent=(n?Math.round(d/n*100):0)+"%";document.getElementById("count").textContent=d+" / "+n;document.getElementById("progress").style.width=(n?d/n*100:0)+"%"}
+bindChecks();save();update();
+const unis=[
+["Toronto MScAC","Priority target · 1 Dec 2026","20 Nov","Applied computing / software + AI evidence; polished statement and references.","Project A","https://mscac.utoronto.ca/apply/"],
+["Georgia Tech MS QCF","Rolling review per coordinator; final international date to verify in portal","25 Nov internal target","Coordinator confirmed rolling admissions/no fixed deadline; English question referred to Graduate Education. GRE/GMAT required; 3 LORs; probability/statistics remains important.","Project B + A","https://qcf.gatech.edu/prospective-students/application-requirements"],
+["Manchester MSc Quantitative Finance","2027 staged admissions; exact selection dates not confirmed","27 Nov internal target","Grade-card PDF sent 10 Nov for preliminary review; official NITK transcript requested and pending. IELTS required before offer; tailored quant SOP and advanced maths evidence.","Project B","https://www.alliancembs.manchester.ac.uk/study/masters/how-to-apply/"],
+["Purdue MSBAIM","15 Dec 2026 early deadline; 1 Apr 2027 final international","8 Dec internal target","English-test waiver explicitly refused; IELTS/TOEFL/Duolingo required. Enter all unofficial test details before submitting. IELTS target sitting 1–5 Dec.","Project A","https://new.business.purdue.edu/masters/programs/ms-business-analytics-and-information-management/application.php"],
+["Edinburgh MSc Financial Modelling & Optimization","Round 1 · 15 Dec 2026; no application fee","8 Dec internal target","Admissions cannot pre-assess; recommends submitting a complete application for a definitive decision. Probability requirement remains a risk; English/MOI decision pending.","Project B","https://study.ed.ac.uk/programmes/postgraduate-taught/640-financial-modelling-and-optimization"],
+["Trinity MSc Business Analytics & AI for Management","Priority · rolling/open","30 Nov","Applied analytics, statistical reasoning, ML, business communication and evidence of coding.","Project A","https://www.tcd.ie/business/programmes/masters-programmes/admissions/"],
+["UCD MSc Financial Data Science (B746)","Open from 1 Oct 2026; no hard closing date published","10 Dec internal target","Portal enquiry submitted 10 Nov; reference submitted. Awaiting written answer on statistics prerequisite, external graded course, MOI and GRE.","Project A","https://www.ucd.ie/"],
+["UCD MSc Quantitative Finance (B158)","Open from 1 Oct 2026; no hard closing date published","15 Dec internal target","Portal enquiry submitted 10 Nov; reference submitted. Awaiting written answer on probability/statistics prerequisite, external graded course, MOI and GRE.","Project B","https://www.ucd.ie/"],
+["Warwick MSc Business Analytics & AI","Priority · rolling; apply early","15 Dec","Statistics, programming/IT evidence, analytics projects; verify IT-professor LOR requirement.","Project A","https://warwick.ac.uk/study/postgraduate/courses/"],
+["Warwick MSc Financial Technology","Conditional · target Jan round","20 Dec","Finance + programming, applied modelling and quantitative readiness.","A + B","https://warwick.ac.uk/study/postgraduate/courses/"],
+["ESSEC MSc Data Sciences & Business Analytics (direct M2)","Priority · 6 Jan 2027 Round 2","20 Dec","Applied ML, statistics, business impact, data pipeline; verify direct-M2 eligibility and MOI waiver.","Project A","https://www.essec.edu/en/program/master-data-sciences-business-analytics/"],
+["ESSEC Master in Finance (direct M2)","Alternative · 6 Jan 2027 Round 2","20 Dec","Finance foundations, risk/markets, quant analysis; confirm exact test and M2 entry rules.","Project B","https://www.essec.edu/"],
+["UT Austin MS Business Technology & AI (MSBTAI)","12 Jan 2027 Step 1; 19 Jan Steps 2–3","22 Dec internal target","Separate MOI/India exemption enquiry sent 10 Nov; awaiting reply. October admissions guidance: coding readiness exercises; international tuition $59,700; merit scholarships available.","Project A","https://www.mccombs.utexas.edu/graduate/specialized-masters/ms-business-technology-and-artificial-intelligence/admissions"],
+["BSE Data Science for Decision Making","Priority · 15 Jan 2027","22 Dec","Strong probability/statistics, inference, optimization, programming and research readiness.","A + course","https://bse.eu/masters-degrees/admissions"],
+["Rotman Master of Financial Risk Management","Priority if risk career · 20 Jan 2027 Round 2","5 Jan","Credit/market risk, statistics, model validation, stress testing and risk-career narrative.","Project A","https://www.rotman.utoronto.ca/programs/specialized-programs/master-of-financial-risk-management/admissions/"],
+["Bocconi MAFINRISK","Conditional · 2027/28 calendar to confirm","15 Dec","Quantitative finance, probability/statistics, risk and finance; get exact specialized-master deadline.","A + B","https://www.unibocconi.it/"],
+["EDHEC MSc Financial Engineering","Passive target · Round 1 10 Nov; Round 2 19 Jan","5 Jan","Derivatives, stochastic/numerical methods, programming and quant project; Round 1 only if already polished.","Project B","https://www.edhec.edu/en/programmes/masters-degree/msc-financial-engineering"],
+["EDHEC MSc Data Analytics & AI","Passive target · exact round verify","5 Jan","Statistical learning, data engineering, ML evaluation and business applications.","Project A","https://www.edhec.edu/"],
+["Exeter MSc Financial Technology / Finance & Data Science","Conditional · 2027 date to verify","15 Jan","Quantitative finance + data science; compare module fit, fees and employment outcomes.","A + B","https://www.exeter.ac.uk/study/postgraduate/"],
+["Galway Data Analytics","Do not rely · non-EU portal reported closed","Recheck only if reopened","Do not count as backup unless the university explicitly reopens the 2027 non-EU portal.","—","https://www.universityofgalway.ie/"],
+["Maynooth MSc Business Analytics","Backup · verify 2027 portal","15 Feb","Applied statistics, business analytics, employability and ROI.","Project A","https://www.maynoothuniversity.ie/"],
+["UCC MSc Business Analytics","Backup · rolling / closes when full","15 Feb","Analytics, statistics, applied projects and employment fit.","Project A","https://www.ucc.ie/"]
+];
+function renderUnis(q=""){document.querySelector("#uniTable tbody").innerHTML=unis.filter(r=>r.join(" ").toLowerCase().includes(q.toLowerCase())).map(r=>`<tr><td><a href="${r[5]}" target="_blank">${r[0]}</a></td><td>${r[1]}</td><td><b>${r[2]}</b></td><td>${r[3]}</td><td>${r[4]}</td></tr>`).join("")}
+renderUnis();document.getElementById("uniSearch").addEventListener("input",e=>renderUnis(e.target.value));
+document.getElementById("copyClaude").onclick=()=>{let t=document.getElementById("claudePrompt").innerText;if(navigator.clipboard?.writeText){navigator.clipboard.writeText(t).then(()=>document.getElementById("copyClaude").textContent="Copied").catch(()=>prompt("Copy prompt",t))}else prompt("Copy prompt",t)};
+document.getElementById("copyTechPrompt").onclick=()=>{let t=document.getElementById("techPrompt").innerText;if(navigator.clipboard?.writeText){navigator.clipboard.writeText(t).then(()=>document.getElementById("copyTechPrompt").textContent="Copied").catch(()=>prompt("Copy daily prompt",t))}else prompt("Copy daily prompt",t)};
+const notes=document.getElementById("notes");notes.value=state.notes;notes.addEventListener("input",()=>{state.notes=notes.value;save();document.getElementById("saveStatus").textContent="Saved locally."});
+document.getElementById("export").onclick=()=>{let a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify({exportedAt:new Date().toISOString(),...state},null,2)],{type:"application/json"}));a.download="fall2027_admissions_progress.json";a.click();URL.revokeObjectURL(a.href)};
+document.getElementById("print").onclick=()=>window.print();
+
+document.getElementById("progressImport")?.addEventListener("change", async (evt)=>{
+ const file=evt.target.files?.[0];if(!file)return;
+ try {
+   const incoming=JSON.parse(await file.text());
+   if(!incoming || typeof incoming !== "object" || !incoming.done || typeof incoming.done !== "object")throw new Error("Invalid progress export");
+   const key="fall2027_admissions_master_tracker_2026_11_09";
+   const value={...incoming,done:incoming.done,notes:typeof incoming.notes === "string"?incoming.notes:""};
+   delete value.exportedAt;
+   if(!confirm("Importing progress will replace the checklist and notes stored in this browser. Continue?"))return;
+   localStorage.setItem(key,JSON.stringify(value));
+   location.reload();
+ }catch(error){alert("Could not import this file. Select a progress JSON exported from this dashboard.");}
+ evt.target.value="";
+});
+</script></body></html>
