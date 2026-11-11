@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Project A | SBA 7(a) | Updated 12 November 2026</title>
+<style>
+:root{--bg:#f4f7fb;--card:#fff;--ink:#17243b;--muted:#63738a;--line:#dce5f0;--navy:#19345e;--blue:#315fb8;--green:#167452;--amber:#96620d;--red:#b33a49}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.55 system-ui,-apple-system,Segoe UI,sans-serif}main{max-width:1120px;margin:auto;padding:24px}header{background:linear-gradient(120deg,#142b4f,#315da7);color:#fff;padding:26px;border-radius:18px;margin-bottom:16px}h1{font-size:27px;margin:4px 0 8px}h2{font-size:19px;margin:0 0 12px}h3{font-size:15px;margin:18px 0 8px}p{margin:7px 0}.muted{color:var(--muted)}header .muted{color:#dce8fb}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}.kpi,.panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:15px}.kpi b{display:block;font-size:21px}.kpi span{font-size:12px;color:var(--muted)}.panel{margin:14px 0}.callout{padding:13px 15px;border-left:4px solid var(--amber);background:#fff8e9;border-radius:9px;margin:12px 0}.good{border-left-color:var(--green);background:#edf8f3}.bad{border-left-color:var(--red);background:#fff0f1}.pill{display:inline-block;border-radius:999px;padding:3px 9px;font-size:11px;font-weight:800;background:#eef2f8;color:#45566f}.done{background:#e8f6ef;color:var(--green)}.pending{background:#fff4df;color:var(--amber)}.tablewrap{overflow:auto;border:1px solid var(--line);border-radius:10px}table{width:100%;border-collapse:collapse;background:#fff;font-size:13px}th,td{padding:10px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}th{background:#edf2f9;color:#253c5b}td:first-child{font-weight:650}.task{display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-bottom:1px solid #edf1f6}.task:last-child{border-bottom:0}.task input{margin-top:4px;transform:scale(1.15)}.task small{display:block;color:var(--muted);margin-top:2px}.task label{flex:1}.links a{color:#2458b7;font-weight:650;text-decoration:none}.links a:hover{text-decoration:underline}.bar{height:10px;background:#e8edf5;border-radius:999px;overflow:hidden}.bar span{display:block;height:100%;width:50%;background:#2d8b69}.foot{font-size:12px;color:var(--muted);margin-top:20px}.time{font-weight:750;color:var(--navy);white-space:nowrap}@media(max-width:760px){main{padding:12px}.grid{grid-template-columns:repeat(2,1fr)}h1{font-size:22px}table{font-size:12px}}
+</style></head>
+<body><main>
+<header>
+ <div class="muted">FALL 2027 APPLICATIONS · PROJECT A · UPDATED 12 NOVEMBER 2026</div>
+ <h1>SBA 7(a) Credit-Risk Analytics &amp; Model Validation</h1>
+ <p>Historical model validation + contemporary portfolio study · clear completed/open stages · 30 November final deadline</p>
+ <p class="links"><a style="color:#fff" href="index.html">Admissions weekly plan</a> · <a style="color:#fff" href="https://github.com/nayanajagadish299/credit-risk-model-validation">Project repository</a> · <a style="color:#fff" href="https://github.com/nayanajagadish299/credit-risk-model-validation/blob/main/docs/TECHNICAL_REPORT.md">Canonical technical report</a></p>
+</header>
+<div class="callout good"><b>Major milestone:</b> Tasks 3–5E and contemporary Tasks 6A–6D.1 are documented in GitHub, with model and report artifacts. You are ahead of the original November project schedule. This is a <b>retrospective research prototype</b>, not a production lending score; final independent source-to-model reproduction remains open.</div>
+<div class="grid">
+ <div class="kpi"><b>403,248</b><span>Unique FY2020–FY2026 records in Task 6A</span></div>
+ <div class="kpi"><b>233,692</b><span>Eligible FY2020–2024 24-month cohort</span></div>
+ <div class="kpi"><b>FY2024</b><span>Latest reported contemporary model evaluation year</span></div>
+ <div class="kpi"><b>30 Nov</b><span>Committed v1.0 portfolio deadline</span></div>
+</div>
+<div class="panel"><h2>What has actually been completed</h2>
+ <div class="tablewrap"><table><thead><tr><th>Stage</th><th>State</th><th>Evidence / interpretation</th></tr></thead><tbody>
+ <tr><td>Tasks 3–5D</td><td><span class="pill done">Complete</span></td><td>Audit, enriched cohort, interpretability, experiments, corrected adjustment, source-lineage investigation and robustness.</td></tr>
+ <tr><td>Task 5E / 5E.5</td><td><span class="pill done">Documented</span></td><td>Historical frozen models; historical cohort counts rebuilt from sources. Full raw-source-to-model replication is still not verified.</td></tr>
+ <tr><td>Task 6A — FY2020–2026</td><td><span class="pill done">Complete</span></td><td>403,644 raw source rows; 396 exact duplicates; 403,248 unique records. Descriptive trends through FY2026 only.</td></tr>
+ <tr><td>Task 6B — 24-month cohort</td><td><span class="pill done">Complete</span></td><td>FY2020–2024: 269,122 candidates → 233,692 eligible; 1,349 charge-off positives.</td></tr>
+ <tr><td>Task 6C — model comparison</td><td><span class="pill done">Complete</span></td><td>Fit FY2020–2022, development FY2023 and later-year evaluation FY2024. Frozen Logistic and HistGradientBoosting; results limited by rare events and temporal shift.</td></tr>
+ <tr><td>Task 6D.1 — severity</td><td><span class="pill done">Complete</span></td><td>Gross charge-off amounts and approval-ratio descriptions, including strict as-of sensitivity. The ratio is <b>not LGD</b>.</td></tr>
+ <tr><td>Final scientific/release gate</td><td><span class="pill pending">Open</span></td><td>Approval-time provenance, source-to-model reproducibility, independent review, licensing, demo and CV/SOP integration.</td></tr>
+ </tbody></table></div>
+</div>
+<div class="panel"><h2>Two separate modelling designs — do not mix results</h2>
+ <div class="tablewrap"><table><thead><tr><th></th><th>Historical 120-month design</th><th>Contemporary 24-month design</th></tr></thead><tbody>
+ <tr><td>Approval cohorts</td><td>FY2010–2014</td><td>FY2020–2024</td></tr>
+ <tr><td>Model fitting</td><td>FY2010–2013 · 164,628 loans</td><td>FY2020–2022 · 123,342 eligible</td></tr>
+ <tr><td>Evaluation</td><td>FY2014 development · 45,888 loans</td><td>FY2023 development; FY2024 later-year evaluation · 60,114 eligible in FY2024</td></tr>
+ <tr><td>Logistic average precision</td><td>0.106057 (FY2014)</td><td>0.015398 (FY2024)</td></tr>
+ <tr><td>HGB average precision</td><td>0.109897 (FY2014)</td><td>0.014408 (FY2024)</td></tr>
+ <tr><td>Key limitation</td><td>FY2015–2016 previously inspected; not pristine holdout</td><td>FY2024 not blind; low prevalence and imperfect calibration</td></tr>
+ </tbody></table></div>
+ <div class="callout"><b>FY2025–FY2026:</b> included in the descriptive SBA approval audit, but <b>not</b> in the 24-month mature model evaluation. Ten-year outcomes for recent loans are also not mature. A future censoring-aware survival extension would be separate work and is not a required November deliverable.</div>
+</div>
+<div class="panel">
+ <h2>Project completion checklist</h2>
+ <p class="muted">Evidence-backed completed stages are marked automatically. Pending stages remain open until verified. Your choices are saved in this browser.</p>
+ <div class="bar"><span id="progress"></span></div><p id="progressText" class="muted"></p>
+ <div id="tasks"><div class="task"><input type="checkbox" data-id="p1" id="p1"><label for="p1"><strong>Public SBA source, snapshot and provenance documented</strong><small>30 September 2026 extract; sources kept outside public repository</small></label><span class="pill done">Evidence found</span></div>
+<div class="task"><input type="checkbox" data-id="p2" id="p2"><label for="p2"><strong>Historical audit, fixed-horizon cohorts and temporal split</strong><small>Strict FY2010–FY2014 research cohort</small></label><span class="pill done">Evidence found</span></div>
+<div class="task"><input type="checkbox" data-id="p3" id="p3"><label for="p3"><strong>Tasks 3–4: interpretability, feature enrichment and provenance diagnostics</strong><small>Original anomaly and feature-audit work</small></label><span class="pill done">Evidence found</span></div>
+<div class="task"><input type="checkbox" data-id="p4" id="p4"><label for="p4"><strong>Task 5A: feature-set experiments A–F</strong><small>Historical feature ablation and validation</small></label><span class="pill done">Evidence found</span></div>
+<div class="task"><input type="checkbox" data-id="p5" id="p5"><label for="p5"><strong>Task 5B: term-anomaly audit</strong><small>Term/product/year investigation</small></label><span class="pill done">Evidence found</span></div>
+<div class="task"><input type="checkbox" data-id="p6" id="p6"><label for="p6"><strong>Initial Task 5C adjusted analysis</strong><small>Exploratory first run; superseded by corrections</small></label><span class="pill done">Evidence found</span></div>
+<div class="task"><input type="checkbox" data-id="p7" id="p7"><label for="p7"><strong>Corrected Task 5C.1/5C.2 analyses</strong><small>Stable adjusted analysis and limitations</small></label><span class="pill done">Evidence found</span></div>
+<div class="task"><input type="checkbox" data-id="p8" id="p8"><label for="p8"><strong>Task 5D source-lineage and robustness</strong><small>Term sensitivity, model comparison, provenance work</small></label><span class="pill done">Evidence found</span></div>
+<div class="task"><input type="checkbox" data-id="p9" id="p9"><label for="p9"><strong>Historical Logistic Regression / HGB comparison and calibration</strong><small>FY2014 development validation and bootstrap comparison</small></label><span class="pill done">Evidence found</span></div>
+<div class="task"><input type="checkbox" data-id="p13" id="p13"><label for="p13"><strong>Task 5E.1–5E.3 model freeze and curated historical release</strong><small>Frozen models, reports and manifest checks</small></label><span class="pill done">Evidence found</span></div>
+<div class="task"><input type="checkbox" data-id="p14" id="p14"><label for="p14"><strong>Task 5E.5 raw-source cohort count reconciliation</strong><small>Cohort counts reproduced; not full source-to-model reproduction</small></label><span class="pill done">Evidence found</span></div>
+<div class="task"><input type="checkbox" data-id="p15" id="p15"><label for="p15"><strong>Task 6A: FY2020–FY2026 descriptive portfolio audit</strong><small>403,248 unique records after exact duplicates</small></label><span class="pill done">Evidence found</span></div>
+<div class="task"><input type="checkbox" data-id="p16" id="p16"><label for="p16"><strong>Task 6B: FY2020–FY2024 mature 24-month outcome cohort</strong><small>233,692 eligible; 1,349 positives</small></label><span class="pill done">Evidence found</span></div>
+<div class="task"><input type="checkbox" data-id="p17" id="p17"><label for="p17"><strong>Task 6C: FY2023 model development and FY2024 temporal evaluation</strong><small>Frozen logistic/HGB pipelines, bootstrap, calibration metrics</small></label><span class="pill done">Evidence found</span></div>
+<div class="task"><input type="checkbox" data-id="p18" id="p18"><label for="p18"><strong>Task 6D.1: gross charge-off severity study</strong><small>8,202 historical charged-off records in contemporary source</small></label><span class="pill done">Evidence found</span></div>
+<div class="task"><input type="checkbox" data-id="p19" id="p19"><label for="p19"><strong>Task 6D.1 strict as-of sensitivity</strong><small>8,173 dated-by-snapshot records; not LGD</small></label><span class="pill done">Evidence found</span></div>
+<div class="task"><input type="checkbox" data-id="p20" id="p20"><label for="p20"><strong>Canonical technical report and curated research-prototype documentation</strong><small>Consolidated Markdown report, methodology and caveats</small></label><span class="pill done">Evidence found</span></div>
+<div class="task"><input type="checkbox" data-id="p10" id="p10"><label for="p10"><strong>Verify actual approval-time feature values and selection bias</strong><small>Historical point-in-time versions are not yet independently verified</small></label><span class="pill pending">Open</span></div>
+<div class="task"><input type="checkbox" data-id="p11" id="p11"><label for="p11"><strong>Independent raw-source-to-frozen-model reproduction and synthetic-test verification</strong><small>Cohort count recreation alone does not meet this gate</small></label><span class="pill pending">Open</span></div>
+<div class="task"><input type="checkbox" data-id="p21" id="p21"><label for="p21"><strong>Final manual statistical/financial review of all admissions-facing claims</strong><small>Check rare-event metrics, drift, calibration and censored follow-up</small></label><span class="pill pending">Open</span></div>
+<div class="task"><input type="checkbox" data-id="p22" id="p22"><label for="p22"><strong>Source/data rights, code licensing and release-safety signoff</strong><small>License for repository code remains unresolved</small></label><span class="pill pending">Open</span></div>
+<div class="task"><input type="checkbox" data-id="p23" id="p23"><label for="p23"><strong>Integrate verified Project A accomplishments in CV and SOPs</strong><small>Avoid implying prospective prediction or production validation</small></label><span class="pill pending">Open</span></div>
+<div class="task"><input type="checkbox" data-id="p12" id="p12"><label for="p12"><strong>Optional polished dashboard/demo and portfolio v1.0 signoff</strong><small>Do not delay applications for UI polish</small></label><span class="pill pending">Open</span></div></div>
+</div>
+<div class="panel"><h2>Research integrity and release gates</h2>
+ <div class="callout"><b>Never claim:</b> model validation through FY2026; clean untouched FY2014/FY2024/FY2015–16 testing; causal effect of term divisibility; final approval-time predictor availability; LGD or expected loss from gross charged-off amount divided by approval amount; production readiness.</div>
+ <p><b>Prediction artifact caveat:</b> the malformed FY2024 loan-level prediction archive was marked invalid and excluded from curated release. Use aggregate metrics and verified frozen artifacts only; do not recover or publish individual predictions.</p>
+ <p><b>Outstanding scientific checks:</b> feature versions at origination, strict-cohort selection bias, incomplete source-to-model reproduction, rare-outcome calibration, reporting uncertainty, independent review and code licensing.</p>
+ <p><b>Useful safe commands:</b> see <a href="https://github.com/nayanajagadish299/credit-risk-model-validation/blob/main/docs/REPRODUCE.md">REPRODUCE.md</a> for synthetic test commands, report checksum verification and release validation. Do not refit/rescore models solely to update documentation.</p>
+</div>
+<div class="panel"><h2>Finish-early schedule · protect applications</h2>
+ <div class="tablewrap"><table><thead><tr><th>Date</th><th>Only necessary Project A action</th><th>Priority vs applications</th></tr></thead><tbody>
+ <tr><td>12 Nov</td><td>Record Task 6A–6D.1 as complete; establish remaining research gates. No new model run required.</td><td>After 10 AM Prof. Nagamma call, GRE diagnostic, graded-course choice and CV Part 2.</td></tr>
+ <tr><td>13–15 Nov</td><td>One limited session: reread canonical report and manifests, check scientific claims, source citations and release safety.</td><td>GRE, LORs, SOP outlines and IELTS booking first.</td></tr>
+ <tr><td>16–20 Nov</td><td>Target: finish reproducibility assessment, synthetic tests and a two-paragraph CV/SOP-safe project summary. Document any limits that cannot be resolved.</td><td>Applications and referee packets dominate.</td></tr>
+ <tr><td>21–27 Nov</td><td>Resolve code license, release checks, GitHub README/report consistency and optional lightweight visual demo only if time.</td><td>Do not delay Toronto/Georgia Tech/Manchester submissions.</td></tr>
+ <tr><td>28–30 Nov</td><td>Final defensibility review and v1.0 signoff, with unresolved limitations explicitly documented.</td><td>Hard project deadline: 30 Nov; December is for applications.</td></tr>
+ </tbody></table></div>
+</div>
+<div class="foot">Updated 12 November 2026 from the latest Project A GitHub README, canonical report and reproduction guide. No raw data or confidential banking materials included.</div>
+</main>
+<script>
+const key='project_a_sba_7a_tracker_2026_11_10';
+const confirmed=["p1","p2","p3","p4","p5","p6","p7","p8","p9","p13","p14","p15","p16","p17","p18","p19","p20"];
+let saved={};try{saved=JSON.parse(localStorage.getItem(key)||'{}')}catch(e){}
+if(!saved.release20261112){confirmed.forEach(id=>saved[id]=true);saved.release20261112=true;}
+const boxes=[...document.querySelectorAll('#tasks input[type=checkbox]')];
+boxes.forEach(b=>{const id=b.dataset.id;b.checked=!!saved[id];b.addEventListener('change',()=>{saved[id]=b.checked;try{localStorage.setItem(key,JSON.stringify(saved))}catch(e){}draw()})});
+try{localStorage.setItem(key,JSON.stringify(saved))}catch(e){}
+function draw(){let done=boxes.filter(b=>b.checked).length;let pct=boxes.length?Math.round(done*100/boxes.length):0;document.getElementById('progress').style.width=pct+'%';document.getElementById('progressText').textContent=done+' of '+boxes.length+' evidence milestones checked ('+pct+'%). Remaining counts represent review/release work, not unfinished core modelling.'}draw();
+</script></body></html>
