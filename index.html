@@ -245,13 +245,14 @@ textarea,input[type=text]{width:100%;border:1px solid #cbd6e5;border-radius:9px;
 </section>
 
 <section class="view" id="projects">
- <div class="callout good"><b>Project A decision · 10 Nov 2026:</b> The public SBA 7(a) credit-risk analysis is now the flagship project. It is more distinctive than starting a second generic UCI credit-card project. Your analytical work is ahead of the original December plan; corrected validation, reproducibility and portfolio packaging remain.</div>
+ <div class="callout good"><b>Project A decision · 10 Nov 2026:</b> The public SBA 7(a) credit-risk analysis is the flagship project. A retrospective research prototype and curated GitHub release were published by 11 Nov, ahead of the 30 Nov deadline. Independent raw-source-to-model reproduction and human review of limitations remain unfinished.</div>
  <div class="panel">
   <h2>Project A · SBA 7(a) Credit-Risk Analytics &amp; Model Validation</h2>
-  <div class="cardhead"><span class="pill green">Flagship · analysis substantially advanced</span><span class="pill blue">Financial data science / credit risk / model risk</span></div>
-  <p><b>Dataset:</b> Public SBA 7(a) FOIA loan data, September 30, 2026 snapshot. Current development uses FY2010–FY2013 for fitting and FY2014 for forward validation. FY2015–FY2016 remains a locked test and has not been opened.</p>
+  <div class="cardhead"><span class="pill green">Published retrospective prototype · 11 Nov</span><span class="pill blue">Financial data science / credit risk / model risk</span></div>
+  <p><b>Dataset:</b> Public SBA 7(a) FOIA loan data, September 30, 2026 snapshot. Current development uses FY2010–FY2013 for fitting and FY2014 for forward validation. FY2015–FY2016 outcomes were inspected in an early baseline run, so this period is NOT an untouched confirmatory test. Recent corrected-audit runs did not newly inspect it.</p>
   <p><b>Why this is the right flagship:</b> it connects your ANZ credit-risk/model-validation experience to independent work on public portfolio data, temporal cohort construction, feature provenance, model comparison and a substantive product-data anomaly. Do not build a duplicate UCI benchmark in parallel.</p>
-  <h3>Verified progress · 10 November</h3>
+  <div class="callout good"><b>11 Nov research release verified:</b> Published SBA retrospective model-validation prototype. Frozen Extended HistGradientBoosting (FY2014 PR-AUC 0.1099, ROC-AUC 0.6695, Brier 0.05571) and Logistic Regression comparator (PR-AUC 0.1061, ROC-AUC 0.6557). Fit FY2010–FY2013: 164,628 loans; FY2014 development validation: 45,888 loans. Term and BusinessAge excluded from both predictors. GitHub includes model card, technical report, scripts, aggregate-only results, hashed models and static release checks. <b>Still open:</b> independently prove full public-CSV-to-model reproduction, check feature timing and selection bias, independently review scientific claims, and optionally polish a demo. FY2015–FY2016 is not an untouched test set.</div>
+  <h3>Verified progress · 11 November</h3>
   <div class="tablewrap"><table><thead><tr><th>Workstream</th><th>Status</th><th>Evidence / outcome</th></tr></thead><tbody>
    <tr><td>Data quality and cohort construction</td><td><span class="pill green">Completed</span></td><td>Public-data profiling, quality audits, fixed-horizon outcome and temporal cohort construction.</td></tr>
    <tr><td>Task 3 — interpretability</td><td><span class="pill green">Completed</span></td><td>Feature-group permutation analysis and model interpretation; loan-term signal flagged for investigation.</td></tr>
@@ -259,11 +260,12 @@ textarea,input[type=text]{width:100%;border:1px solid #cbd6e5;border-radius:9px;
    <tr><td>Task 5A — model experiments A–F</td><td><span class="pill green">Completed</span></td><td>Compared feature sets, term/revolver interaction and term ablation on FY2014 validation. Experiment D was strongest in this run, but the term signal is not yet fully explained.</td></tr>
    <tr><td>Task 5B — exact-term anomaly audit</td><td><span class="pill green">Completed</span></td><td>Investigated term patterns by year, revolving status and product groups.</td></tr>
    <tr><td>Task 5C — initial adjusted analysis</td><td><span class="pill">Initial run complete</span></td><td>Adjusted associations and model comparison produced. Results remain provisional because the first risk curve included unsupported term/revolver combinations and did not fully report the Unanswered category.</td></tr>
-   <tr><td>Task 5C.1 — corrected analysis</td><td><span class="pill">Pending rerun</span></td><td>Correction script/package prepared; corrected output ZIP is not yet available.</td></tr>
-   <tr><td>Task 5D — product and model investigation</td><td><span class="pill">Not started</span></td><td>Begins only after corrected Task 5C passes its quality gate.</td></tr>
+   <tr><td>Task 5C.1 / 5C.2 — corrected and stable adjusted analysis</td><td><span class="pill green">Completed</span></td><td>Corrected/stable adjusted analyses completed, with separate development-validation diagnostics and limitations.</td></tr>
+   <tr><td>Task 5D — robustness and lineage audit</td><td><span class="pill green">Completed</span></td><td>Term-pattern investigation, product sensitivity and source-lineage review completed, including output ZIP.</td></tr>
+   <tr><td>Task 5E.1–5E.3 — model freeze and publication</td><td><span class="pill green">Published prototype</span></td><td>Term-free / BusinessAge-free frozen Logistic Regression and HistGradientBoosting pipelines; model card, technical report, aggregate results and repository release checks published. Raw-to-model reproduction not independently verified.</td></tr>
   </tbody></table></div>
   <h3>Critical Task 5C correction gate</h3>
-  <div class="callout warn"><b>Do not use the wrong input.</b> The saved sba_task5c_output.zip is the first-run output. The newer corrected package contains code and correction notes, not corrected results. The corrected script requires the Task 4 enriched cohort at sba_cohort_output_v2/strict_train_fy2010_2014.csv.gz, including revolver_status, fixed_or_variable_interest_ind and collateral_ind. The separately saved 15-column base cohort is not a valid substitute.</div>
+  <div class="callout warn"><b>Do not use the wrong input.</b> The old first-run sba_task5c_output.zip remains superseded. The corrected and stable-run outputs are now completed. Reproduction requires the Task 4 enriched cohort at sba_cohort_output_v2/strict_train_fy2010_2014.csv.gz, including revolver_status, fixed_or_variable_interest_ind and collateral_ind. The separately saved 15-column base cohort is not a valid substitute.</div>
   <p>Accept Task 5C.1 only after checking: (1) all exact-term groups are retained and small groups flagged rather than pooled away; (2) the FY2014 term/revolver curve uses observed-support groups only; (3) the <i>Unanswered</i> business-age category has outcome rates and a full coefficient where estimable; (4) imputation medians are fitted on FY2010–FY2013 only; and (5) the manifest confirms FY2015–FY2016 was not opened.</p>
   <h3>Next technical sequence</h3>
   <ol>
@@ -285,10 +287,10 @@ textarea,input[type=text]{width:100%;border:1px solid #cbd6e5;border-radius:9px;
   <div class="task"><input type="checkbox" data-id="pa3"><label><b>Baseline model and Task 5A feature experiments</b><small>Completed · experiments A–F and validation comparison.</small></label></div>
   <div class="task"><input type="checkbox" data-id="pa4"><label><b>Task 3 interpretability and Task 4 feature enrichment</b><small>Completed · feature diagnostics, missingness and provenance work.</small></label></div>
   <div class="task"><input type="checkbox" data-id="pa5"><label><b>Task 5B audit and initial Task 5C analysis</b><small>Initial work completed; Task 5C corrected rerun still required.</small></label></div>
-  <div class="task"><input type="checkbox" data-id="pa6"><label><b>Run corrected Task 5C.1 and pass all quality checks</b><small>Next action · use the enriched Task 4 cohort, not the 15-column base file.</small></label></div>
-  <div class="task"><input type="checkbox" data-id="pa7"><label><b>Complete Task 5D product-driver and model-comparison work</b><small>Pending · logistic versus HistGradientBoosting, term ablation and group calibration.</small></label></div>
-  <div class="task"><input type="checkbox" data-id="pa8"><label><b>Freeze features, verify timing and complete final validation</b><small>Pending · keep FY2015–FY2016 locked until the freeze decision.</small></label></div>
-  <div class="task"><input type="checkbox" data-id="pa9"><label><b>Publish reproducible code, report, tests and demo</b><small>Pending · only after results and implementation are independently checked.</small></label></div>
+  <div class="task"><input type="checkbox" data-id="pa6"><label><b>Run corrected Task 5C.1 and pass all quality checks</b><small>Completed · corrected quality gate passed with enriched Task 4 cohort.</small></label></div>
+  <div class="task"><input type="checkbox" data-id="pa7"><label><b>Complete Task 5D product-driver and model-comparison work</b><small>Completed · Task 5D investigation and extended Logistic vs HGB comparison published.</small></label></div>
+  <div class="task"><input type="checkbox" data-id="pa8"><label><b>Freeze features, verify timing and complete final validation</b><small>Partial · model predictors frozen (no term or BusinessAge), but approval-time provenance and raw-to-model reproduction remain unverified. FY2015–FY2016 was seen earlier and is not untouched.</small></label></div>
+  <div class="task"><input type="checkbox" data-id="pa9"><label><b>Publish reproducible code, report, tests and demo</b><small>Partial · public research prototype, README, model card and technical report published; independent source-to-model reproduction and polished demo remain open.</small></label></div>
  </div>
  <div class="panel"><h2>Project B · C++ / Python Quant Pricing Toolkit</h2><div class="cardhead"><span class="pill amber">Defer until January 2027</span><span class="pill blue">QCF / quant finance</span></div>
   <p>Keep Project B small and separate: Black–Scholes, binomial tree, Monte Carlo, Greeks, implied volatility and numerical tests. Do not start it while Project A, GRE, SOPs and December applications are still active.</p>
@@ -298,14 +300,14 @@ textarea,input[type=text]{width:100%;border:1px solid #cbd6e5;border-radius:9px;
 <section class="view" id="techsprint">
  <div class="panel">
   <h2>Project A completion sprint · 11–30 November</h2>
-  <div class="callout good"><b>You are ahead on analysis, and the release deadline remains 30 November.</b> The original commitment is to finish Project A within November. By 10 November, cohort construction, baseline experiments, interpretability, Task 4 enrichment, Task 5A, Task 5B and initial Task 5C are complete. Finish corrected analysis, Task 5D, model decisions and packaging in the remaining sprint. December is not a planned extension.</div>
+  <div class="callout good"><b>You are ahead on analysis, and the release deadline remains 30 November.</b> The original commitment is to finish Project A within November. By 11 November, corrected Task 5C, Task 5D, model freeze and a curated research-prototype release are complete. Focus on independent reproducibility, manual scientific review and admissions-ready claims; do not restart finished experiments. December is not a planned extension.</div>
   <div class="grid">
-   <div class="kpi"><b>Completed</b><span class="muted">Data through initial Task 5C</span></div>
-   <div class="kpi"><b>11 Nov</b><span class="muted">Corrected Task 5C.1 → Task 5D gate</span></div>
-   <div class="kpi"><b>15 Nov</b><span class="muted">Target: Task 5D findings and feature-decision draft</span></div>
+   <div class="kpi"><b>Published</b><span class="muted">SBA research prototype · 11 Nov</span></div>
+   <div class="kpi"><b>11 Nov</b><span class="muted">5C + 5D + 5E model freeze completed</span></div>
+   <div class="kpi"><b>15 Nov</b><span class="muted">Target: independently check reproduction and report claims</span></div>
    <div class="kpi"><b>30 Nov</b><span class="muted">Committed deadline · Project A portfolio v1</span></div>
   </div>
-  <div class="callout warn"><b>Scope rule:</b> Task 5D must not run on top of unresolved Task 5C outputs. Do not open the FY2015–FY2016 locked test before the feature/model freeze. Application deadlines, LORs, GRE and SOPs outrank optional project features.</div>
+  <div class="callout warn"><b>Scope rule:</b> The earlier FY2015–FY2016 evaluation means that period is not a pristine test set. Do not present it as a fresh holdout or tune against it. The remaining priority is reproduction and precise model limitations; applications, LORs, GRE and SOPs outrank optional extensions.</div>
  </div>
  <div class="panel">
   <h2>Technical milestones</h2>
@@ -328,8 +330,8 @@ textarea,input[type=text]{width:100%;border:1px solid #cbd6e5;border-radius:9px;
   <div class="task"><input type="checkbox" data-id="sba04"><label>Task 5A experiments A–F completed</label></div>
   <div class="task"><input type="checkbox" data-id="sba05"><label>Task 5B exact-term anomaly audit completed</label></div>
   <div class="task"><input type="checkbox" data-id="sba06"><label>Initial Task 5C adjusted analysis completed (provisional)</label></div>
-  <div class="task"><input type="checkbox" data-id="sba07"><label>Corrected Task 5C.1 run completed and verified</label></div>
-  <div class="task"><input type="checkbox" data-id="sba08"><label>Task 5D product-driver and term-pattern ablation analysis completed</label></div>
+  <div class="task"><input type="checkbox" data-id="sba07"><label>Corrected Task 5C.1 / 5C.2 runs completed and verified</label></div>
+  <div class="task"><input type="checkbox" data-id="sba08"><label>Task 5D robustness and source-lineage audit completed</label></div>
   <div class="task"><input type="checkbox" data-id="sba09"><label>Logistic vs HistGradientBoosting and group calibration compared</label></div>
   <div class="task"><input type="checkbox" data-id="sba10"><label>Point-in-time feature review and final feature decisions documented</label></div>
   <div class="task"><input type="checkbox" data-id="sba11"><label>Reproducible scripts, requirements and automated tests verified</label></div>
@@ -337,8 +339,8 @@ textarea,input[type=text]{width:100%;border:1px solid #cbd6e5;border-radius:9px;
  </div>
  <div class="panel">
   <h2>Reviewer prompt for the next technical session</h2>
-  <p class="hint">Use after the corrected Task 5C.1 outputs exist. Do not let a reviewer or an AI tool replace your own interpretation.</p>
-  <div class="codeprompt" id="techPrompt">Act as a senior credit-risk model validation reviewer. Review my independent SBA 7(a) public-data analysis using the September 30, 2026 snapshot. First verify the Task 5C.1 correction outputs and the FY2010–FY2013 fit / FY2014 validation boundary. Do not open or use FY2015–FY2016. Then help me design Task 5D: product-driver investigation, Unanswered business-age sensitivity, term-pattern ablation, Logistic Regression versus HistGradientBoosting, calibration by group and final feature decisions. Challenge point-in-time availability, unsupported combinations, sample-size issues, calibration and overfitting. Distinguish observed evidence from inference; never call association causal or odds ratios risk ratios. Ask me to explain each decision and do not invent results.</div>
+  <p class="hint">Use to audit the published model-freeze/release rather than to rerun the already completed Task 5C/5D by default.</p>
+  <div class="codeprompt" id="techPrompt">Act as a senior credit-risk model validation reviewer. Review my independent SBA 7(a) public-data analysis using the September 30, 2026 snapshot. First verify the Task 5C.1 correction outputs and the FY2010–FY2013 fit / FY2014 validation boundary. FY2015–FY2016 was already inspected in earlier work; do not claim it is an untouched final test. Then help me design Task 5D: product-driver investigation, Unanswered business-age sensitivity, term-pattern ablation, Logistic Regression versus HistGradientBoosting, calibration by group and final feature decisions. Challenge point-in-time availability, unsupported combinations, sample-size issues, calibration and overfitting. Distinguish observed evidence from inference; never call association causal or odds ratios risk ratios. Ask me to explain each decision and do not invent results.</div>
   <button class="btn" id="copyTechPrompt">Copy Project A review prompt</button>
  </div>
  <div class="panel">
@@ -349,7 +351,7 @@ textarea,input[type=text]{width:100%;border:1px solid #cbd6e5;border-radius:9px;
    <li>Reproducible scripts, tests, a short model card and a clear technical report.</li>
    <li>Honest limitations: exploratory results are not causal, the reference repository is not yet reproduced, and the locked test is not used for model tuning.</li>
   </ul>
-  <p><b>CV wording after the corrected analysis is complete:</b> “Developed an independent SBA 7(a) credit-risk analytics workflow using public FOIA data; constructed fixed-horizon temporal cohorts, compared feature sets and investigated product/term anomalies with model-validation diagnostics.” Add metrics only after corrected analysis and final validation are defensible.</p>
+  <p><b>CV wording after final human review and verification:</b> “Developed an independent SBA 7(a) credit-risk analytics workflow using public FOIA data; constructed fixed-horizon temporal cohorts, compared feature sets and investigated product/term anomalies with model-validation diagnostics.” Add metrics only after corrected analysis and final validation are defensible.</p>
  </div>
 </section>
 
@@ -597,6 +599,7 @@ const key="fall2027_admissions_master_tracker_2026_11_10";
 let previous={};try{previous=JSON.parse(localStorage.getItem(oldKey)||"{}")}catch(e){}
 let state={};try{state=JSON.parse(localStorage.getItem(key)||"{}")}catch(e){}
 state.done=state.done||{};state.notes=state.notes||previous.notes||"";
+["pa6","pa7","sba07","sba08","sba09","nov11_task5c","nov11_task5c_gate","nov11_task5d"].forEach(id=>{state.done[id]=true;});
 ["pa1","pa2","pa3","pa4","pa5","sba01","sba02","sba03","sba04","sba05","sba06"].forEach(id=>{state.done[id]=true;});
 const dayPlan=[
 ["Mon 9 Nov","Admin foundation","Completed · archive sent evidence",[
@@ -612,10 +615,10 @@ const dayPlan=[
 ["Spend one focused hour on Credit-Risk Validation Workbench","Create repo skeleton, scope and dataset plan"],
 ["Draft the master SOP narrative outline","EEE + IT minor → banking-sector credit risk/model validation → target role"],
 ["Shortlist IELTS Academic test seats for 1–5 Dec","Not booked; user plans to book before 15 Dec"]]],
-["Wed 11 Nov","Project A correction + course decision","Free day · 5–6 focused hours; Task 5D is conditional",[
+["Wed 11 Nov","Project A accelerated + admissions","Technical tasks complete; continue course/LOR/GRE",[
 ["Run corrected Task 5C.1","Use the Task 4 enriched cohort; do not substitute the 15-column base cohort. Save all corrected outputs and the run manifest.","","nov11_task5c"],
 ["Pass the Task 5C quality gate","Check full exact-term groups, observed-support term/revolver analysis, Unanswered outcomes/coefficient, fit-only imputation and locked-test status. If any check fails, fix it before Task 5D.","","nov11_task5c_gate"],
-["Start Task 5D only if Task 5C.1 passes","Product-driver investigation, Unanswered sensitivity and term-pattern ablation. Keep FY2015–FY2016 locked.","","nov11_task5d"],
+["Complete Task 5D source-lineage and robustness audit","Completed 11 Nov; original FY2015–FY2016 baseline was previously inspected, so it is not untouched.","","nov11_task5d"],
 ["Choose the graded statistics/probability course and one supplementary certificate","Prioritise a credible graded option within budget; compare the next NPTEL IIT Delhi offering, ASU/RWU credit courses and the University of Michigan non-credit certificate. Do not pay before admissions guidance.","","nov11_course"],
 ["Call the professor who asked for a 11 Nov follow-up; secure a backup LOR","Project work must not displace the December-deadline recommender follow-up.","","nov11_lor"],
 ["Take a timed GRE Quant diagnostic and start the error log","45-minute diagnostic; record topic accuracy, timing and the three highest-impact gaps. Keep the 26 Nov target provisional.","","nov11_gre"]]],
