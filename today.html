@@ -1,23 +1,86 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Thursday 12 November — Admissions Daily Tracker</title><style>
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Friday 13 November 2026 · Admissions Task List</title>
+<style>
 :root{--ink:#192844;--muted:#62748c;--line:#dce5f1;--blue:#2b59b3;--green:#127a5c;--bg:#f4f7fc;--amber:#946208}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.52 system-ui,-apple-system,Segoe UI,Arial,sans-serif}
 main{max-width:1000px;margin:auto;padding:22px 16px 70px}header{padding:26px;background:linear-gradient(120deg,#142d53,#376bb9);color:#fff;border-radius:18px}header h1{font-size:29px;margin:6px 0}header p{color:#e4ecfb;margin:5px 0}.panel{background:white;border:1px solid var(--line);border-radius:14px;margin:14px 0;padding:17px}.links a{color:#2454a2;text-decoration:none;font-weight:700}.links{margin:15px 0}.tag{border-radius:20px;background:#eef3fa;font-size:12px;font-weight:750;padding:5px 10px;color:#425774}.good{color:var(--green);background:#e8f7f0}.warn{background:#fff2dc;color:var(--amber)}.status{display:flex;flex-wrap:wrap;gap:10px}.stat{border:1px solid var(--line);border-radius:12px;padding:12px 14px;flex:1;min-width:150px}.stat b{font-size:23px;display:block}.stat small{font-size:12px;color:var(--muted)}.bar{height:11px;background:#e7edf6;border-radius:12px;overflow:hidden;margin-top:15px}.bar span{height:100%;width:0;background:var(--green);display:block}.task{display:grid;grid-template-columns:105px 30px minmax(0,1fr);gap:12px;align-items:start;padding:13px 0;border-bottom:1px solid #e9eef6}.task:last-child{border-bottom:none}.task input{width:20px;height:20px;margin:3px 0;accent-color:var(--green)}.time{font-weight:800;color:#365d9c;font-size:13px}.title{font-weight:750}.desc{font-size:13px;color:var(--muted);margin-top:2px}.label{display:inline-block;font-size:11px;font-weight:800;color:#697e96;background:#f0f4fa;border-radius:20px;padding:1px 8px;margin-top:4px}.task.checked .title{text-decoration:line-through;color:#77899e}.note{background:#f6f9fd;border-left:4px solid #7399cc;border-radius:8px;padding:11px 14px;margin-top:10px}.note.warning{background:#fff7ed;border-left-color:#d7a14d}button{border:1px solid #cdd9e8;background:#fff;border-radius:9px;padding:8px 12px;cursor:pointer;color:#315aa1;font-weight:700}textarea{width:100%;min-height:100px;border:1px solid #c7d4e4;border-radius:9px;padding:12px;font:inherit}.small{font-size:12px;color:var(--muted)}@media(max-width:620px){header h1{font-size:23px}.task{grid-template-columns:85px 24px 1fr;gap:8px}.time{font-size:12px}main{padding:12px}}
-</style></head><body><main>
-<header><div style="font-size:12px;letter-spacing:.12em;font-weight:750">FALL 2027 · THURSDAY 12 NOVEMBER 2026 · IST</div><h1>Today's admissions execution tracker</h1><p>Nagamma contacted (no answer) · Janani call at 2 PM · gym at 3 PM · head bath after gym</p></header>
-<div class="links"><a href="index.html">← Weekly admissions dashboard</a> &nbsp;·&nbsp; <a href="project-a.html">Project A tracker</a></div>
-<div class="panel"><div class="status"><div class="stat"><b id="count">0</b><small>Tasks complete</small></div><div class="stat"><b id="remain">0</b><small>Still open</small></div><div class="stat"><b>2:00 PM</b><small>Janani call (proposed, not confirmed)</small></div><div class="stat"><b>3:00 PM</b><small>Gym; head bath afterward</small></div></div><div class="bar"><span id="progress"></span></div>
-<div class="note warning"><b>LOR status:</b> Prof. Nagamma was called today but did not pick up. That is only a completed <i>call attempt</i>—not a recommendation agreement. A follow-up email has been sent. If Prof. Janani is unavailable at 2 PM, ask for a convenient time instead of repeated calls. Friday's Nagamma retry is suggested, not an appointment.</div></div>
-<div class="panel"><h2 style="margin-top:0">Today's schedule and checklist</h2><div id="list"></div></div>
-<div class="panel"><h2 style="margin-top:0">Quick notes and results</h2><p class="small">Write down GRE weak areas, course decision and any professor responses. These notes stay in this browser only, not in the public GitHub repository.</p><textarea id="notes" placeholder="GRE:&#10;Statistics course:&#10;Prof. Janani:&#10;CV/SOP progress:"></textarea><div style="display:flex;gap:10px;margin-top:10px;align-items:center;flex-wrap:wrap"><button id="copy">Copy notes</button><span class="small" id="saved"></span></div></div>
-<div class="panel"><div class="note"><b>Advance schedule rule:</b> GRE, course choice, CV and recommender follow-ups outrank optional Project A work. Stop around 1 AM even if you might otherwise stay up until 2 AM; today's plan includes breaks and personal time.</div><p class="small">Updated 12 November 2026. Checking boxes here does not automatically update the weekly dashboard; the same named priorities are also recorded there.</p></div>
-</main><script>
-const tasks=[["09:45–10:15","Academic admin","Nagamma call — attempted, no answer","Follow-up already emailed; no LOR agreement yet.","done"],["10:15–11:30","GRE","Timed Quant diagnostic + error log","45-minute timed set; review mistakes, timing and top three weaknesses.","pending"],["11:30–12:15","Break","Lunch / rest","Hydrate and reset before another focus block.","pending"],["12:15–1:45","Course","Choose graded statistics / probability course","Compare graded assessment, credit/transcript, syllabus, schedule, budget and university acceptance.","pending"],["1:45–2:00","Admin","Prepare Janani call","Have deadlines, CV and a concise request ready.","pending"],["2:00–2:20","LOR","Call Prof. Janani","Suggested time, not confirmed availability; confirm early-December LOR support and documentation. No answer → ask for a preferred time.","pending"],["2:20–3:00","Break","Snack and get ready for gym","Do not turn this into a long study session.","pending"],["3:00–4:15","Personal","Gym","Workout; adjust travel time as needed.","pending"],["4:15–5:15","Personal","Head bath + rest","Head bath after gym; recharge.","pending"],["5:15–7:00","CV","CV Part 2 — ANZ and Project A","Verify individual ownership, tools, project results, dates, titles and school experience.","pending"],["7:00–8:00","Break","Dinner","Uninterrupted meal and rest.","pending"],["8:00–9:30","SOP","Quant Finance SOP outline","Motivation, quantified/verified evidence, skill gaps and career fit.","pending"],["9:30–10:45","SOP","Financial Data Science SOP outline","Separate BA/FDS narrative, project contribution and target career.","pending"],["10:45–11:15","Break","Break / walk","Short screen-free reset.","pending"],["11:15–12:00","Admissions","IELTS + application deadlines","Review test timing for Purdue/Manchester, check near-term SOP/doc requirements.","pending"],["12:00–12:45","Project A","Light Project A final review — optional","Review reproduction limitations, feature timing and release integrity; no repeat model runs.","pending"],["12:45–1:00","Wrap-up","Write Friday's action plan","Note outstanding tasks; stop early if tired.","pending"]];
-const key='fall2027_today_2026_11_12_v1';
+</style>
+<style>
+.recaps{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:12px}
+.recap{border:1px solid var(--line);border-radius:10px;padding:11px;background:#f7fafc}
+.recap strong{display:block;font-size:13px;color:#294d76}
+.recap span{font-size:12px;color:#53667d}
+@media(max-width:650px){.recaps{grid-template-columns:1fr}}
+</style>
+</head>
+<body><main>
+<header>
+ <div style="font-size:12px;letter-spacing:.12em;font-weight:750">FALL 2027 · FRIDAY 13 NOVEMBER 2026 · IST</div>
+ <h1>Friday's admissions task list</h1>
+ <p>Workday priorities: December references, one strong SOP section, and only a short optional CV or course task. Keep Friday light.</p>
+</header>
+<div class="links"><a href="index.html">Weekly admissions dashboard</a> &nbsp;·&nbsp; <a href="nov12.html">Thursday 12 Nov archive</a> &nbsp;·&nbsp; <a href="project-a.html">Project A tracker</a></div>
+<div class="panel">
+ <h2 style="margin-top:0">Thursday 12 November — verified progress</h2>
+ <div class="recaps">
+  <div class="recap"><strong>GRE Quant study: done</strong><span>Reviewed/studied all four major topic areas. Timed diagnostic, new exam score and retake booking are not verified.</span></div>
+  <div class="recap"><strong>Statistics-course selection: done</strong><span>Colorado Boulder Probability Foundations; Michigan Inferential Statistical Analysis with Python; DataCamp Statistics Fundamentals with Python; provisional ASU STP 226 credit route. Enrollment/certification not confirmed.</span></div>
+  <div class="recap"><strong>Project B: planned</strong><span>A friend expects to prepare a draft/prototype by 21–22 Nov. Not completed; independent review, validation, personal development and truthful crediting are required before CV/SOP use.</span></div>
+  <div class="recap"><strong>Admissions administration: progressed</strong><span>Recent email statuses audited; EDHEC guidance reviewed; short meeting-request email drafted but not sent. CV Part 2 deferred to Friday if time allows, otherwise Monday 16 Nov.</span></div>
+ </div>
+</div>
+<div class="panel">
+ <div class="status">
+   <div class="stat"><b id="count">0</b><small>Friday tasks complete</small></div>
+   <div class="stat"><b id="remain">0</b><small>Friday tasks remaining</small></div>
+   <div class="stat"><b>1–2 h</b><small>Target effort outside work</small></div>
+ </div>
+ <div class="bar"><span id="progress"></span></div>
+ <div class="note warning"><b>Important:</b> For Toronto MScAC and other universities with originality policies, the recommender should author the actual letter. Share a factual evidence packet, CV, achievements and deadlines instead of writing their letter for them. No GRE mock, certificate, email send or Project B completion is pre-checked.</div>
+</div>
+<div class="panel">
+ <h2 style="margin-top:0">Friday task checklist</h2>
+ <div id="list"></div>
+</div>
+<div class="panel">
+ <h2 style="margin-top:0">Quick notes</h2>
+ <p class="small">Record only verified outcomes. Notes remain in this browser's local storage and do not sync to GitHub.</p>
+ <textarea id="notes" placeholder="Janani/Nagamma reply or call outcome:&#10;Basavaraj evidence packet:&#10;SOP paragraph progress:&#10;CV: Friday or Monday?&#10;Financial-aid / ANZ DataCamp status:"></textarea>
+ <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:10px"><button id="copy">Copy notes</button><span id="saved" class="small"></span></div>
+</div>
+<div class="panel">
+ <div class="note"><b>Sunday milestone:</b> produce a complete Financial Data Science SOP and draft one university-specific response; check early-December referee coverage. <b>Monday fallback:</b> finish CV Part 2 if Friday is too busy. Avoid spending Friday on extra Project B coding.</div>
+ <p class="small">Updated 13 November 2026. Friday checklist state is separate from Thursday's archive. University deadlines and confirmed communications are tracked on the main dashboard.</p>
+</div>
+</main>
+<script>
+const tasks=[
+ ["Before or after work","LOR","Check Janani and Nagamma responses","If no reply, make one courteous contact at an appropriate hour; confirm whether early-December recommendations are possible.","pending"],
+ ["20 min","LOR","Prepare Basavaraj evidence packet","Course/project achievements, CV, concise factual examples, earliest deadlines and programme list. Professor authors and approves the final letter.","pending"],
+ ["45–60 min","SOP","Draft the Financial Data Science SOP core","Write your NITK-to-ANZ motivation, one verifiable credit-risk example, and why graduate study follows naturally. Aim for coherent prose, not another skeleton.","pending"],
+ ["10–15 min","Courses","Take one enrollment/financial-aid step","Check ANZ DataCamp track access or submit one Coursera aid request. Chosen courses do not mean enrolled or complete.","pending"],
+ ["15–30 min (optional)","CV","CV Part 2: review ANZ and project contributions","Verify role, impact, dates, individual versus team work, and confidential-information boundaries. If work is busy, move to Monday 16 Nov.","pending"],
+ ["Optional","EDHEC","Review meeting-request reply draft","Send only if you approve it; no mail has been sent yet. The recruiter also provided a meeting-booking link.","pending"],
+ ["Optional","GRE","Plan the timed Quant diagnostic","Topic study is finished. Set Sunday diagnostic time; don't mark a timed test complete without sitting it.","pending"]
+];
+const key='fall2027_today_2026_11_13_v1';
 let state={};try{state=JSON.parse(localStorage.getItem(key)||'{}')}catch(e){}
-state.done=state.done||{};if(!state.firstLoad){state.done[0]=true;state.firstLoad=true}
+state.done=state.done||{};
 const list=document.getElementById('list');
-tasks.forEach((t,i)=>{const el=document.createElement('div');el.className='task';const time=document.createElement('div');time.className='time';time.textContent=t[0];const input=document.createElement('input');input.type='checkbox';input.setAttribute('aria-label','Mark '+t[2]+' complete');input.checked=!!state.done[i];const info=document.createElement('div');const name=document.createElement('div');name.className='title';name.textContent=t[2];const desc=document.createElement('div');desc.className='desc';desc.textContent=t[3];const tag=document.createElement('span');tag.className='label';tag.textContent=t[1];info.append(name,desc,tag);el.append(time,input,info);el.classList.toggle('checked',input.checked);input.addEventListener('change',()=>{state.done[i]=input.checked;el.classList.toggle('checked',input.checked);persist();render()});list.append(el)});
-const notes=document.getElementById('notes');notes.value=state.notes||'';notes.addEventListener('input',()=>{state.notes=notes.value;persist();document.getElementById('saved').textContent='Saved locally'});
-document.getElementById('copy').addEventListener('click',()=>{const t=notes.value; if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t).then(()=>{document.getElementById('saved').textContent='Copied'}).catch(()=>{document.getElementById('saved').textContent='Select and copy your notes manually'});else{notes.focus();notes.select();document.getElementById('saved').textContent='Select and copy your notes manually'}});
-function persist(){try{localStorage.setItem(key,JSON.stringify(state))}catch(e){}}function render(){const n=tasks.filter((_,i)=>state.done[i]).length;document.getElementById('count').textContent=n+' / '+tasks.length;document.getElementById('remain').textContent=tasks.length-n;document.getElementById('progress').style.width=(100*n/tasks.length)+'%'}persist();render();
-</script></body></html>
+tasks.forEach((t,i)=>{const el=document.createElement('div');el.className='task';
+ const time=document.createElement('div');time.className='time';time.textContent=t[0];
+ const input=document.createElement('input');input.type='checkbox';input.setAttribute('aria-label','Mark '+t[2]+' complete');input.checked=!!state.done[i];
+ const info=document.createElement('div');const name=document.createElement('div');name.className='title';name.textContent=t[2];
+ const desc=document.createElement('div');desc.className='desc';desc.textContent=t[3];
+ const tag=document.createElement('span');tag.className='label';tag.textContent=t[1];info.append(name,desc,tag);
+ el.append(time,input,info);el.classList.toggle('checked',input.checked);input.addEventListener('change',()=>{state.done[i]=input.checked;el.classList.toggle('checked',input.checked);persist();render()});list.append(el)});
+const notes=document.getElementById('notes');notes.value=state.notes||'';
+notes.addEventListener('input',()=>{state.notes=notes.value;persist();document.getElementById('saved').textContent='Saved locally'});
+document.getElementById('copy').addEventListener('click',()=>{const t=notes.value;if(navigator.clipboard?.writeText)navigator.clipboard.writeText(t).then(()=>document.getElementById('saved').textContent='Copied').catch(()=>{notes.focus();notes.select()});else{notes.focus();notes.select()}});
+function persist(){try{localStorage.setItem(key,JSON.stringify(state))}catch(e){}}
+function render(){const n=tasks.filter((_,i)=>state.done[i]).length;document.getElementById('count').textContent=n+' / '+tasks.length;document.getElementById('remain').textContent=tasks.length-n;document.getElementById('progress').style.width=(100*n/tasks.length)+'%'}
+persist();render();
+</script>
+</body></html>
