@@ -74,7 +74,7 @@ h2{font-size:19px;margin:0 0 9px}h3{font-size:15px;margin:16px 0 6px}.task{displ
 </div>
 <script>
 const key="admissions_15nov_plan_v1";
-let state={};try{state=JSON.parse(localStorage.getItem(key)||"{}")}catch(e){}
+let state={};try{state=JSON.parse(localStorage.getItem(key)||"{}")}catch(e){};if(state.email===undefined)state.email=true;
 function update(){
  const boxes=[...document.querySelectorAll('input[type="checkbox"][data-id]')];
  const n=boxes.length,d=boxes.filter(x=>x.checked).length;
